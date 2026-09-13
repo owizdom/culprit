@@ -1,0 +1,6 @@
+{
+  "id": "m05",
+  "category": "multi_hunk",
+  "title": "irq: comment q0/q1 layout, tidy retirq",
+  "body": "Documents what lands in q0/q1 on IRQ entry, labels the RVFI IRQ bookkeeping registers, and tidies the retirq return-address masking."
+}

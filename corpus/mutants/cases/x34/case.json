@@ -1,0 +1,6 @@
+{
+  "id": "x34",
+  "category": "mutant_with_decoys",
+  "title": "cpu: re-indent latched_branch",
+  "body": "Re-indents the latched_branch assignment. Whitespace only, no functional change intended."
+}

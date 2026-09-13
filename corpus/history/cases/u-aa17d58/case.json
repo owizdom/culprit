@@ -1,0 +1,8 @@
+{
+  "id": "u-aa17d58",
+  "category": "upstream_bug",
+  "title": "compressed decode: tidy the shift-immediate cases",
+  "body": "Small cleanup in the compressed instruction pre-decoder. No functional change intended.",
+  "commit": "aa17d587843a78e3d49b5e24bc5e4ab76e8c6383",
+  "url": "https://github.com/YosysHQ/picorv32/commit/aa17d587843a78e3d49b5e24bc5e4ab76e8c6383"
+}

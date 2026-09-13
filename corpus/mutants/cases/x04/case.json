@@ -1,0 +1,6 @@
+{
+  "id": "x04",
+  "category": "mutant_with_decoys",
+  "title": "mem: annotate mem_rdata_q, re-indent instr_srli",
+  "body": "Small readability pass while reading the mem code: a short comment next to the mem_rdata_q assignment and the instr_srli assignment re-indented. No functional change intended."
+}

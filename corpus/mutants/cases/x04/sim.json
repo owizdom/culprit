@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": "EBREAK instruction at 0x00000ED4",
+  "trap_cycle": 193793,
+  "seconds": 6.3,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

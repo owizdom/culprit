@@ -1,0 +1,6 @@
+{
+  "id": "m02",
+  "category": "multi_hunk",
+  "title": "counters: decode rdinstret by CSR number, rename counter-read flag",
+  "body": "Rewrites the rdinstret/rdinstreth decode as explicit CSR number, rs1 and funct3 compares instead of one 20-bit magic constant, renames is_rdcycle_rdcycleh_rdinstr_rdinstrh to is_counter_read, and documents when each counter ticks."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "h02",
+  "category": "two_hunk",
+  "title": "Shifter and U-type operand cleanups",
+  "body": "Uses one arithmetic-shift form for the 4-bit right-shift stage and selects the lui/auipc first operand from the auipc flag, which reads more naturally next to the PC."
+}

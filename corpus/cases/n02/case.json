@@ -1,0 +1,6 @@
+{
+  "id": "n02",
+  "category": "not_reproduced",
+  "title": "irq: simplify timer expiry compare",
+  "body": "timer - 1 == 0 under a timer != 0 guard is just timer == 1. Also groups the branch-flag resets and notes what the RVFI CSR block reports."
+}

@@ -1,0 +1,27 @@
+{
+  "bug_contains": "instr_rs1_signed = |{instr_mulh, instr_mulhu};",
+  "fix_line": "\twire instr_rs1_signed = |{instr_mulh, instr_mulhsu};",
+  "intended_contains": [
+    "wire instr_rs2_signed = instr_mulh;",
+    "// Operand signedness: MULH is signed x signed"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 2210,
+      "changed": [
+        2213,
+        2216,
+        2217
+      ]
+    }
+  ],
+  "bug_lines": [
+    2216
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

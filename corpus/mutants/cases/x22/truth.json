@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 326,
+      "changed": [
+        329
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1090,
+      "changed": [
+        1093
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1650,
+      "changed": [
+        1653
+      ]
+    }
+  ],
+  "bug_lines": [
+    329
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\tpcpi_int_ready = |{ENABLE_PCPI && pcpi_ready, (ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_ready, ENABLE_DIV && pcpi_div_ready};",
+  "intended_contains": [
+    "// instr_timer for this instruction",
+    "reg_out <= cpuregs_rs1; // reg_out in this cycle"
+  ],
+  "mutation": {
+    "line": 329,
+    "base_line": 329,
+    "from": "||",
+    "to": "&&",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1093,
+      "kind": "comment_above",
+      "text": "// instr_timer for this instruction"
+    },
+    {
+      "base_line": 1652,
+      "kind": "trailing_comment",
+      "text": "reg_out <= cpuregs_rs1; // reg_out in this cycle"
+    }
+  ]
+}

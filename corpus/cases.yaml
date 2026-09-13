@@ -1,0 +1,753 @@
+# CULPRIT evaluation corpus. Each case is a set of exact-text edits to the PicoRV32 checkout at ef203c2.
+# Ground truth lives here and in cases/<id>/truth.json; the agent never reads either.
+
+- id: a01
+  category: bug_in_intended_edit
+  title: "ALU: group the single-cycle comparators"
+  body: "Readability pass on the non-TWO_CYCLE_ALU block: arithmetic and shifts first, then the three comparators under one comment, with the signed/unsigned intent spelled out. No functional change intended."
+  edits:
+    - path: picorv32.v
+      find: |
+        			alu_add_sub = instr_sub ? reg_op1 - reg_op2 : reg_op1 + reg_op2;
+        			alu_eq = reg_op1 == reg_op2;
+        			alu_lts = $signed(reg_op1) < $signed(reg_op2);
+        			alu_ltu = reg_op1 < reg_op2;
+        			alu_shl = reg_op1 << reg_op2[4:0];
+        			alu_shr = $signed({instr_sra || instr_srai ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];
+      replace: |
+        			alu_add_sub = instr_sub ? reg_op1 - reg_op2 : reg_op1 + reg_op2;
+        			alu_shl = reg_op1 << reg_op2[4:0];
+        			alu_shr = $signed({instr_sra || instr_srai ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];
+
+        			// comparators: equality, signed less-than, unsigned less-than
+        			alu_eq = reg_op1 == reg_op2;
+        			alu_lts = $signed(reg_op1) < reg_op2;
+        			alu_ltu = $unsigned(reg_op1) < $unsigned(reg_op2);
+  truth:
+    bug_contains: "alu_lts = $signed(reg_op1) < reg_op2;"
+    fix_line: "\t\t\talu_lts = $signed(reg_op1) < $signed(reg_op2);"
+    intended_contains: ["alu_ltu = $unsigned(reg_op1) < $unsigned(reg_op2);", "// comparators: equality, signed less-than, unsigned less-than"]
+
+- id: a02
+  category: bug_in_intended_edit
+  title: "mem: replace narrow-read case tables with indexed part-selects"
+  body: "The byte and halfword read muxes in the look-ahead always block were written as explicit case tables. Collapse them into one indexed part-select each; same behaviour, fewer lines to keep in sync with the strobe logic."
+  edits:
+    - path: picorv32.v
+      find: |
+        			1: begin
+        				mem_la_wdata = {2{reg_op2[15:0]}};
+        				mem_la_wstrb = reg_op1[1] ? 4'b1100 : 4'b0011;
+        				case (reg_op1[1])
+        					1'b0: mem_rdata_word = {16'b0, mem_rdata[15: 0]};
+        					1'b1: mem_rdata_word = {16'b0, mem_rdata[31:16]};
+        				endcase
+        			end
+        			2: begin
+        				mem_la_wdata = {4{reg_op2[7:0]}};
+        				mem_la_wstrb = 4'b0001 << reg_op1[1:0];
+        				case (reg_op1[1:0])
+        					2'b00: mem_rdata_word = {24'b0, mem_rdata[ 7: 0]};
+        					2'b01: mem_rdata_word = {24'b0, mem_rdata[15: 8]};
+        					2'b10: mem_rdata_word = {24'b0, mem_rdata[23:16]};
+        					2'b11: mem_rdata_word = {24'b0, mem_rdata[31:24]};
+        				endcase
+        			end
+      replace: |
+        			1: begin
+        				mem_la_wdata = {2{reg_op2[15:0]}};
+        				mem_la_wstrb = reg_op1[1] ? 4'b1100 : 4'b0011;
+        				mem_rdata_word = {16'b0, mem_rdata[{reg_op1[1], 3'b000} +: 16]};
+        			end
+        			2: begin
+        				mem_la_wdata = {4{reg_op2[7:0]}};
+        				mem_la_wstrb = 4'b0001 << reg_op1[1:0];
+        				mem_rdata_word = {24'b0, mem_rdata[{reg_op1[1:0], 3'b000} +: 8]};
+        			end
+  truth:
+    bug_contains: "mem_rdata[{reg_op1[1], 3'b000} +: 16]"
+    fix_line: "\t\t\t\tmem_rdata_word = {16'b0, mem_rdata[{reg_op1[1], 4'b0000} +: 16]};"
+    intended_contains: ["mem_rdata_word = {24'b0, mem_rdata[{reg_op1[1:0], 3'b000} +: 8]};"]
+
+- id: a03
+  category: bug_in_intended_edit
+  title: "ldmem: make load sign extension explicit"
+  body: "Some downstream synthesis flows we use mishandle $signed() on part-selects inside case items. Spell out the sign extension for lh/lb with replication instead. Pure rewrite of the same logic."
+  edits:
+    - path: picorv32.v
+      find: |
+        							latched_is_lu: reg_out <= mem_rdata_word;
+        							latched_is_lh: reg_out <= $signed(mem_rdata_word[15:0]);
+        							latched_is_lb: reg_out <= $signed(mem_rdata_word[7:0]);
+      replace: |
+        							// sign-extend narrow loads explicitly instead of relying on $signed()
+        							latched_is_lu: reg_out <= mem_rdata_word;
+        							latched_is_lh: reg_out <= {{16{mem_rdata_word[15]}}, mem_rdata_word[15:0]};
+        							latched_is_lb: reg_out <= {{24{mem_rdata_word[8]}}, mem_rdata_word[7:0]};
+  truth:
+    bug_contains: "{{24{mem_rdata_word[8]}}"
+    fix_line: "\t\t\t\t\t\t\tlatched_is_lb: reg_out <= {{24{mem_rdata_word[7]}}, mem_rdata_word[7:0]};"
+    intended_contains: ["latched_is_lh: reg_out <= {{16{mem_rdata_word[15]}}, mem_rdata_word[15:0]};"]
+
+- id: a04
+  category: bug_in_intended_edit
+  title: "irq: document which q-register each IRQ entry step writes"
+  body: "Adds a comment for the two-step IRQ entry (q0 gets the return address, q1 the pending mask) and writes the q-register index as offset + step in both the QREGS and non-QREGS branches so they read the same way."
+  edits:
+    - path: picorv32.v
+      find: |
+        					if (ENABLE_IRQ_QREGS)
+        						latched_rd <= irqregs_offset | irq_state[0];
+        					else
+        						latched_rd <= irq_state[0] ? 4 : 3;
+      replace: |
+        					// q0 (return address) is written in irq_state 2'b01, q1 (pending IRQs) in 2'b10
+        					if (ENABLE_IRQ_QREGS)
+        						latched_rd <= irqregs_offset + irq_state[1];
+        					else
+        						latched_rd <= 3 + irq_state[0];
+  truth:
+    bug_contains: "latched_rd <= irqregs_offset + irq_state[1];"
+    fix_line: "\t\t\t\t\t\tlatched_rd <= irqregs_offset + irq_state[0];"
+    intended_contains: ["latched_rd <= 3 + irq_state[0];", "// q0 (return address) is written in irq_state 2'b01, q1 (pending IRQs) in 2'b10"]
+
+- id: a05
+  category: bug_in_intended_edit
+  title: "pcpi_mul: document operand signedness per opcode"
+  body: "Adds the MUL/MULH/MULHSU/MULHU signedness table above the decode wires and drops the single-element reduction-OR on instr_rs2_signed. No logic change."
+  edits:
+    - path: picorv32.v
+      find: |
+        	wire instr_any_mul = |{instr_mul, instr_mulh, instr_mulhsu, instr_mulhu};
+        	wire instr_any_mulh = |{instr_mulh, instr_mulhsu, instr_mulhu};
+        	wire instr_rs1_signed = |{instr_mulh, instr_mulhsu};
+        	wire instr_rs2_signed = |{instr_mulh};
+
+        	reg pcpi_wait_q;
+      replace: |
+        	// Operand signedness: MULH is signed x signed, MULHSU is signed x unsigned, MULHU and MUL are unsigned.
+        	wire instr_any_mul = |{instr_mul, instr_mulh, instr_mulhsu, instr_mulhu};
+        	wire instr_any_mulh = |{instr_mulh, instr_mulhsu, instr_mulhu};
+        	wire instr_rs1_signed = |{instr_mulh, instr_mulhu};
+        	wire instr_rs2_signed = instr_mulh;
+
+        	reg pcpi_wait_q;
+  truth:
+    bug_contains: "instr_rs1_signed = |{instr_mulh, instr_mulhu};"
+    fix_line: "\twire instr_rs1_signed = |{instr_mulh, instr_mulhsu};"
+    intended_contains: ["wire instr_rs2_signed = instr_mulh;", "// Operand signedness: MULH is signed x signed"]
+
+- id: a06
+  category: bug_in_intended_edit
+  title: "pcpi_div: normalise operand sign handling on start"
+  body: "Puts the sign bit first in the dividend/divisor negation conditions and replaces the reduction-OR divide-by-zero test with an explicit compare. Lint was flagging |pcpi_rs2 in a boolean context."
+  edits:
+    - path: picorv32.v
+      find: |
+        			dividend <= (instr_div || instr_rem) && pcpi_rs1[31] ? -pcpi_rs1 : pcpi_rs1;
+        			divisor <= ((instr_div || instr_rem) && pcpi_rs2[31] ? -pcpi_rs2 : pcpi_rs2) << 31;
+        			outsign <= (instr_div && (pcpi_rs1[31] != pcpi_rs2[31]) && |pcpi_rs2) || (instr_rem && pcpi_rs1[31]);
+      replace: |
+        			dividend <= pcpi_rs1[31] && (instr_div || instr_rem) ? -pcpi_rs1 : pcpi_rs1;
+        			divisor <= (pcpi_rs2[31] && (instr_div || instr_rem) ? -pcpi_rs2 : pcpi_rs2) << 31;
+        			outsign <= (instr_div && (pcpi_rs1[31] != pcpi_rs2[31]) && pcpi_rs2 != 0) || (instr_rem && pcpi_rs2[31]);
+  truth:
+    bug_contains: "(instr_rem && pcpi_rs2[31])"
+    fix_line: "\t\t\toutsign <= (instr_div && (pcpi_rs1[31] != pcpi_rs2[31]) && pcpi_rs2 != 0) || (instr_rem && pcpi_rs1[31]);"
+    intended_contains: ["pcpi_rs2 != 0", "dividend <= pcpi_rs1[31] && (instr_div || instr_rem) ? -pcpi_rs1 : pcpi_rs1;"]
+
+- id: a07
+  category: bug_in_intended_edit
+  title: "pcpi: build the internal wait/ready OR one co-processor per line"
+  body: "The internal PCPI handshake was two long reduction-ORs that are hard to diff when a co-processor is added. Accumulate wait and ready one enabled core per line instead; same logic."
+  edits:
+    - path: picorv32.v
+      find: |
+        		pcpi_int_wait  = |{ENABLE_PCPI && pcpi_wait,  (ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_wait,  ENABLE_DIV && pcpi_div_wait};
+        		pcpi_int_ready = |{ENABLE_PCPI && pcpi_ready, (ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_ready, ENABLE_DIV && pcpi_div_ready};
+      replace: |
+        		// OR together the handshake of every enabled co-processor
+        		pcpi_int_wait  = ENABLE_PCPI && pcpi_wait;
+        		pcpi_int_wait  = pcpi_int_wait  || ((ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_wait);
+        		pcpi_int_wait  = pcpi_int_wait  || (ENABLE_DIV && pcpi_div_ready);
+        		pcpi_int_ready = ENABLE_PCPI && pcpi_ready;
+        		pcpi_int_ready = pcpi_int_ready || ((ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_ready);
+        		pcpi_int_ready = pcpi_int_ready || (ENABLE_DIV && pcpi_div_ready);
+  truth:
+    bug_contains: "pcpi_int_wait  || (ENABLE_DIV && pcpi_div_ready);"
+    fix_line: "\t\tpcpi_int_wait  = pcpi_int_wait  || (ENABLE_DIV && pcpi_div_wait);"
+    intended_contains: ["pcpi_int_ready = pcpi_int_ready || (ENABLE_DIV && pcpi_div_ready);", "pcpi_int_wait  = pcpi_int_wait  || ((ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_wait);"]
+
+- id: a08
+  category: bug_in_intended_edit
+  title: "decoder: give ALU immediates their own decoded_imm item"
+  body: "Splits is_alu_reg_imm out of the shared I-type immediate item so the ALU immediate path can be special-cased for shift amounts in a follow-up. jalr and loads keep the existing item."
+  edits:
+    - path: picorv32.v
+      find: |
+        				|{instr_jalr, is_lb_lh_lw_lbu_lhu, is_alu_reg_imm}:
+        					decoded_imm <= $signed(mem_rdata_q[31:20]);
+      replace: |
+        				|{instr_jalr, is_lb_lh_lw_lbu_lhu}:
+        					decoded_imm <= $signed(mem_rdata_q[31:20]);
+        				is_alu_reg_imm:
+        					decoded_imm <= $signed(mem_rdata_q[31:21]);
+  truth:
+    bug_contains: "decoded_imm <= $signed(mem_rdata_q[31:21]);"
+    fix_line: "\t\t\t\t\tdecoded_imm <= $signed(mem_rdata_q[31:20]);"
+    intended_contains: ["|{instr_jalr, is_lb_lh_lw_lbu_lhu}:"]
+
+- id: a09
+  category: bug_in_intended_edit
+  title: "alu: give blt/bltu explicit branch-condition items"
+  body: "blt and bltu currently reach alu_out_0 through the shared slt/sltu items, which need the TWO_CYCLE_COMPARE guard. Add explicit one-line items next to bge/bgeu so all six branch conditions are listed together."
+  edits:
+    - path: picorv32.v
+      find: |
+        			instr_bgeu:
+        				alu_out_0 = !alu_ltu;
+      replace: |
+        			instr_bgeu:
+        				alu_out_0 = !alu_ltu;
+        			instr_blt:  alu_out_0 = alu_lts;
+        			instr_bltu: alu_out_0 = alu_lts;
+  truth:
+    bug_contains: "instr_bltu: alu_out_0 = alu_lts;"
+    fix_line: "\t\t\tinstr_bltu: alu_out_0 = alu_ltu;"
+    intended_contains: ["instr_blt:  alu_out_0 = alu_lts;"]
+
+- id: a10
+  category: bug_in_intended_edit
+  title: "shift: add an 8-bit stage to the sequential shifter"
+  body: "Large shift amounts spend up to 10 cycles in cpu_state_shift. Add an 8-bit step ahead of the existing 4-bit step when TWO_STAGE_SHIFT is set; results are unchanged, shifts by 8+ finish sooner."
+  edits:
+    - path: picorv32.v
+      find: |
+        				end else if (TWO_STAGE_SHIFT && reg_sh >= 4) begin
+      replace: |
+        				end else if (TWO_STAGE_SHIFT && reg_sh >= 8) begin
+        					(* parallel_case, full_case *)
+        					case (1'b1)
+        						instr_slli || instr_sll: reg_op1 <= reg_op1 << 8;
+        						instr_srli || instr_srl: reg_op1 <= reg_op1 >> 8;
+        						instr_srai || instr_sra: reg_op1 <= reg_op1 >>> 8;
+        					endcase
+        					reg_sh <= reg_sh - 8;
+        				end else if (TWO_STAGE_SHIFT && reg_sh >= 4) begin
+  truth:
+    bug_contains: "reg_op1 <= reg_op1 >>> 8;"
+    fix_line: "\t\t\t\t\t\tinstr_srai || instr_sra: reg_op1 <= $signed(reg_op1) >>> 8;"
+    intended_contains: ["TWO_STAGE_SHIFT && reg_sh >= 8", "reg_sh <= reg_sh - 8;"]
+
+- id: m01
+  category: multi_hunk
+  title: "decoder: document funct3 encodings"
+  body: "Adds a short funct3 reference next to the instruction decoder and annotates the RVFI mode/ixl constants. While in there I re-checked the conditional branch decode table against the spec."
+  edits:
+    - path: picorv32.v
+      find: |
+        	// Instruction Decoder
+
+        	reg instr_lui, instr_auipc, instr_jal, instr_jalr;
+      replace: |
+        	// Instruction Decoder
+        	//
+        	// funct3 values follow the RV32I base opcode map. Branches: 000 beq, 001 bne, 100 blt,
+        	// 101 bge, 110 bltu, 111 bgeu. Loads/stores: 000 byte, 001 half, 010 word (1xx = unsigned load).
+
+        	reg instr_lui, instr_auipc, instr_jal, instr_jalr;
+    - path: picorv32.v
+      find: |
+        			instr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b111;
+      replace: |
+        			instr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b011;
+    - path: picorv32.v
+      find: |
+        		rvfi_mode <= 3;
+        		rvfi_ixl <= 1;
+      replace: |
+        		rvfi_mode <= 3; // machine mode
+        		rvfi_ixl <= 1;  // XLEN = 32
+  truth:
+    bug_contains: "instr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b011;"
+    fix_line: "\t\t\tinstr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b111;"
+    intended_contains: ["// funct3 values follow the RV32I base opcode map", "rvfi_mode <= 3; // machine mode"]
+
+- id: m02
+  category: multi_hunk
+  title: "counters: decode rdinstret by CSR number, rename counter-read flag"
+  body: "Rewrites the rdinstret/rdinstreth decode as explicit CSR number, rs1 and funct3 compares instead of one 20-bit magic constant, renames is_rdcycle_rdcycleh_rdinstr_rdinstrh to is_counter_read, and documents when each counter ticks."
+  edits:
+    - path: picorv32.v
+      find: |-
+        	wire is_rdcycle_rdcycleh_rdinstr_rdinstrh;
+        	assign is_rdcycle_rdcycleh_rdinstr_rdinstrh = 
+      replace: |-
+        	wire is_counter_read;
+        	assign is_counter_read = 
+    - path: picorv32.v
+      find: |
+        			instr_rdinstr  <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:12] == 'b11000000001000000010) && ENABLE_COUNTERS;
+        			instr_rdinstrh <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:12] == 'b11001000001000000010) && ENABLE_COUNTERS && ENABLE_COUNTERS64;
+      replace: |
+        			// rdinstret / rdinstreth: CSRRS with rs1 = x0 on CSR 0xC02 / 0xC82
+        			instr_rdinstr  <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:20] == 12'hc02 && mem_rdata_q[19:15] == 5'd0 && mem_rdata_q[14:12] == 3'b001) && ENABLE_COUNTERS;
+        			instr_rdinstrh <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:20] == 12'hc82 && mem_rdata_q[19:15] == 5'd0 && mem_rdata_q[14:12] == 3'b010) && ENABLE_COUNTERS && ENABLE_COUNTERS64;
+    - path: picorv32.v
+      find: |
+        		if (ENABLE_COUNTERS) begin
+        			count_cycle <= resetn ? count_cycle + 1 : 0;
+      replace: |
+        		// count_cycle ticks on every clock out of reset; count_instr is bumped per decoded instruction in cpu_state_fetch
+        		if (ENABLE_COUNTERS) begin
+        			count_cycle <= resetn ? count_cycle + 1 : 0;
+    - path: picorv32.v
+      find: "ENABLE_COUNTERS && is_rdcycle_rdcycleh_rdinstr_rdinstrh: begin"
+      replace: "ENABLE_COUNTERS && is_counter_read: begin"
+  truth:
+    bug_contains: "mem_rdata_q[31:20] == 12'hc02"
+    fix_line: "\t\t\tinstr_rdinstr  <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:20] == 12'hc02 && mem_rdata_q[19:15] == 5'd0 && mem_rdata_q[14:12] == 3'b010) && ENABLE_COUNTERS;"
+    intended_contains: ["is_counter_read", "mem_rdata_q[31:20] == 12'hc82"]
+
+- id: m03
+  category: multi_hunk
+  title: "mem: small cleanups around look-ahead strobes and prefetch state"
+  body: "Renames clear_prefetched_high_word_q to the _r suffix we use for plain registers, orders the trap/reset clears the same way as their declarations, and simplifies the halfword strobe select."
+  edits:
+    - path: picorv32.v
+      find: |
+        				mem_la_wstrb = reg_op1[1] ? 4'b1100 : 4'b0011;
+      replace: |
+        				mem_la_wstrb = reg_op1[0] ? 4'b1100 : 4'b0011;
+    - path: picorv32.v
+      find: |
+        			mem_la_secondword <= 0;
+        			prefetched_high_word <= 0;
+        		end else begin
+      replace: |
+        			prefetched_high_word <= 0;
+        			mem_la_secondword <= 0;
+        		end else begin
+    - path: picorv32.v
+      find: |
+        	reg clear_prefetched_high_word_q;
+        	always @(posedge clk) clear_prefetched_high_word_q <= clear_prefetched_high_word;
+
+        	always @* begin
+        		clear_prefetched_high_word = clear_prefetched_high_word_q;
+      replace: |
+        	reg clear_prefetched_high_word_r;
+        	always @(posedge clk) clear_prefetched_high_word_r <= clear_prefetched_high_word;
+
+        	always @* begin
+        		clear_prefetched_high_word = clear_prefetched_high_word_r;
+  truth:
+    bug_contains: "mem_la_wstrb = reg_op1[0] ? 4'b1100 : 4'b0011;"
+    fix_line: "\t\t\t\tmem_la_wstrb = reg_op1[1] ? 4'b1100 : 4'b0011;"
+    intended_contains: ["clear_prefetched_high_word_r"]
+
+- id: m04
+  category: multi_hunk
+  title: "compressed decoder: comment the C.SUB/C.XOR/C.OR/C.AND funct3 map"
+  body: "Documents the funct2 to funct3 mapping in the compressed pre-decoder and cross-references it from the second decode stage. Also labels the RVFI CSR observation ports."
+  edits:
+    - path: picorv32.v
+      find: |
+        								if (mem_rdata_latched[6:5] == 2'b00) mem_rdata_q[14:12] <= 3'b000;
+        								if (mem_rdata_latched[6:5] == 2'b01) mem_rdata_q[14:12] <= 3'b100;
+        								if (mem_rdata_latched[6:5] == 2'b10) mem_rdata_q[14:12] <= 3'b110;
+        								if (mem_rdata_latched[6:5] == 2'b11) mem_rdata_q[14:12] <= 3'b111;
+      replace: |
+        								// funct2 (insn[6:5]) to funct3: 00 SUB->000, 01 XOR->100, 10 OR->110, 11 AND->111
+        								if (mem_rdata_latched[6:5] == 2'b00) mem_rdata_q[14:12] <= 3'b000;
+        								if (mem_rdata_latched[6:5] == 2'b01) mem_rdata_q[14:12] <= 3'b100;
+        								if (mem_rdata_latched[6:5] == 2'b10) mem_rdata_q[14:12] <= 3'b111;
+        								if (mem_rdata_latched[6:5] == 2'b11) mem_rdata_q[14:12] <= 3'b111;
+    - path: picorv32.v
+      find: |
+        	output reg [63:0] rvfi_csr_mcycle_rmask,
+      replace: |
+        	// CSR observation (mcycle/minstret) for riscv-formal csr checks
+        	output reg [63:0] rvfi_csr_mcycle_rmask,
+    - path: picorv32.v
+      find: |
+        								if (mem_rdata_latched[12:10] == 3'b011) begin // C.SUB, C.XOR, C.OR, C.AND
+        									is_alu_reg_reg <= 1;
+      replace: |
+        								if (mem_rdata_latched[12:10] == 3'b011) begin // C.SUB, C.XOR, C.OR, C.AND (funct3 comes from the pre-decoder)
+        									is_alu_reg_reg <= 1;
+  truth:
+    bug_contains: "== 2'b10) mem_rdata_q[14:12] <= 3'b111;"
+    fix_line: "\t\t\t\t\t\t\t\tif (mem_rdata_latched[6:5] == 2'b10) mem_rdata_q[14:12] <= 3'b110;"
+    intended_contains: ["// funct2 (insn[6:5]) to funct3", "(funct3 comes from the pre-decoder)"]
+
+- id: m05
+  category: multi_hunk
+  title: "irq: comment q0/q1 layout, tidy retirq"
+  body: "Documents what lands in q0/q1 on IRQ entry, labels the RVFI IRQ bookkeeping registers, and tidies the retirq return-address masking."
+  edits:
+    - path: picorv32.v
+      find: |
+        				ENABLE_IRQ && irq_state[0]: begin
+        					cpuregs_wrdata = reg_next_pc | latched_compr;
+      replace: |
+        				// IRQ entry: q0 <= return PC, LSB set if the interrupted instruction was compressed
+        				ENABLE_IRQ && irq_state[0]: begin
+        					cpuregs_wrdata = reg_next_pc | latched_compr;
+    - path: picorv32.v
+      find: |
+        						reg_out <= CATCH_MISALIGN ? (cpuregs_rs1 & 32'h fffffffe) : cpuregs_rs1;
+      replace: |
+        						reg_out <= CATCH_MISALIGN ? (cpuregs_rs1 & 32'h fffffffc) : cpuregs_rs1;
+    - path: picorv32.v
+      find: |
+        	reg dbg_irq_call;
+        	reg dbg_irq_enter;
+        	reg [31:0] dbg_irq_ret;
+      replace: |
+        	// dbg_irq_call/dbg_irq_enter track the instruction that takes an IRQ so rvfi_intr marks the first handler instruction
+        	reg dbg_irq_call;
+        	reg dbg_irq_enter;
+        	reg [31:0] dbg_irq_ret;
+  truth:
+    bug_contains: "(cpuregs_rs1 & 32'h fffffffc)"
+    fix_line: "\t\t\t\t\t\treg_out <= CATCH_MISALIGN ? (cpuregs_rs1 & 32'h fffffffe) : cpuregs_rs1;"
+    intended_contains: ["// IRQ entry: q0 <= return PC"]
+
+- id: m06
+  category: multi_hunk
+  title: "cpu: bus-error check and reset block cleanups"
+  body: "Makes the halfword misalignment check use the same two-bit compare style as the word check, orders the load-type latch resets lb/lh/lu, and adds a state list above the main state machine."
+  edits:
+    - path: picorv32.v
+      find: |
+        	// Main State Machine
+      replace: |
+        	// Main State Machine
+        	//
+        	// fetch -> ld_rs1 -> [ld_rs2] -> exec | shift | stmem | ldmem -> fetch; trap is terminal.
+    - path: picorv32.v
+      find: |
+        			latched_trace <= 0;
+        			latched_is_lu <= 0;
+        			latched_is_lh <= 0;
+        			latched_is_lb <= 0;
+      replace: |
+        			latched_trace <= 0;
+        			latched_is_lb <= 0;
+        			latched_is_lh <= 0;
+        			latched_is_lu <= 0;
+    - path: picorv32.v
+      find: |
+        			if (mem_wordsize == 1 && reg_op1[0] != 0) begin
+      replace: |
+        			if (mem_wordsize == 1 && reg_op1[1:0] != 0) begin
+  truth:
+    bug_contains: "if (mem_wordsize == 1 && reg_op1[1:0] != 0) begin"
+    fix_line: "\t\t\tif (mem_wordsize == 1 && reg_op1[0] != 0) begin"
+    intended_contains: ["// fetch -> ld_rs1 -> [ld_rs2]"]
+
+- id: m07
+  category: multi_hunk
+  title: "decoder: annotate immediate formats; rename pcpi timeout counter"
+  body: "Adds bit-layout comments to the immediate decode and renames pcpi_timeout_counter to pcpi_timeout_cnt to match the other short counter names."
+  edits:
+    - path: picorv32.v
+      find: |
+        				is_sb_sh_sw:
+        					decoded_imm <= $signed({mem_rdata_q[31:25], mem_rdata_q[11:7]});
+      replace: |
+        				is_sb_sh_sw:
+        					// S-type: imm[11:5] = insn[31:25], imm[4:0] = insn[11:7]
+        					decoded_imm <= $signed({mem_rdata_q[31:25], mem_rdata_q[12:8]});
+    - path: picorv32.v
+      find: |
+        	reg [3:0] pcpi_timeout_counter;
+      replace: |
+        	reg [3:0] pcpi_timeout_cnt;
+    - path: picorv32.v
+      find: |
+        				if (pcpi_timeout_counter)
+        					pcpi_timeout_counter <= pcpi_timeout_counter - 1;
+        			end else
+        				pcpi_timeout_counter <= ~0;
+        			pcpi_timeout <= !pcpi_timeout_counter;
+      replace: |
+        				if (pcpi_timeout_cnt)
+        					pcpi_timeout_cnt <= pcpi_timeout_cnt - 1;
+        			end else
+        				pcpi_timeout_cnt <= ~0;
+        			pcpi_timeout <= !pcpi_timeout_cnt;
+  truth:
+    bug_contains: "mem_rdata_q[12:8]"
+    fix_line: "\t\t\t\t\tdecoded_imm <= $signed({mem_rdata_q[31:25], mem_rdata_q[11:7]});"
+    intended_contains: ["pcpi_timeout_cnt", "// S-type: imm[11:5] = insn[31:25]"]
+
+- id: m08
+  category: multi_hunk
+  title: "decoder: document compressed jump offset layout"
+  body: "Reflows the C.J/C.JAL offset shuffle with a comment giving the RVC bit order, puts the fetch-state latch clears in declaration order, and notes the rvfi rs1/rs2 address gating."
+  edits:
+    - path: picorv32.v
+      find: |
+        				{ decoded_imm_j[31:11], decoded_imm_j[4], decoded_imm_j[9:8], decoded_imm_j[10], decoded_imm_j[6],
+        				  decoded_imm_j[7], decoded_imm_j[3:1], decoded_imm_j[5], decoded_imm_j[0] } <= $signed({mem_rdata_latched[12:2], 1'b0});
+      replace: |
+        				// C.J / C.JAL: insn[12:2] holds offset bits [11|4|9:8|10|6|7|3:1|5]
+        				{ decoded_imm_j[31:11], decoded_imm_j[4], decoded_imm_j[9:8], decoded_imm_j[10],
+        				  decoded_imm_j[7], decoded_imm_j[6], decoded_imm_j[3:1], decoded_imm_j[5], decoded_imm_j[0] } <= $signed({mem_rdata_latched[12:2], 1'b0});
+    - path: picorv32.v
+      find: |
+        				latched_store <= 0;
+        				latched_stalu <= 0;
+        				latched_branch <= 0;
+        				latched_is_lu <= 0;
+      replace: |
+        				latched_store <= 0;
+        				latched_branch <= 0;
+        				latched_stalu <= 0;
+        				latched_is_lu <= 0;
+    - path: picorv32.v
+      find: |
+        		rvfi_rs1_addr <= dbg_rs1val_valid ? dbg_insn_rs1 : 0;
+        		rvfi_rs2_addr <= dbg_rs2val_valid ? dbg_insn_rs2 : 0;
+      replace: |
+        		// rs1/rs2 addresses are only reported for instructions that actually read them
+        		rvfi_rs1_addr <= dbg_rs1val_valid ? dbg_insn_rs1 : 0;
+        		rvfi_rs2_addr <= dbg_rs2val_valid ? dbg_insn_rs2 : 0;
+  truth:
+    bug_contains: "decoded_imm_j[7], decoded_imm_j[6]"
+    fix_line: "\t\t\t\t  decoded_imm_j[6], decoded_imm_j[7], decoded_imm_j[3:1], decoded_imm_j[5], decoded_imm_j[0] } <= $signed({mem_rdata_latched[12:2], 1'b0});"
+    intended_contains: ["C.J / C.JAL: insn[12:2] holds offset bits"]
+
+- id: t01
+  category: testbug
+  title: "regs: tidy register-file write"
+  body: "Small cleanup of the register-file write statement in the non-PICORV32_REGS path. No functional change intended."
+  edits:
+    - path: picorv32.v
+      find: |
+        			cpuregs[latched_rd] <= cpuregs_wrdata;
+        `endif
+      replace: |
+        			cpuregs[latched_rd ^ 1'b1] <= cpuregs_wrdata;
+        `endif
+  truth:
+    bug_contains: "cpuregs[latched_rd ^ 1'b1] <= cpuregs_wrdata;"
+    fix_line: "\t\t\tcpuregs[latched_rd] <= cpuregs_wrdata;"
+    intended_contains: []
+
+- id: t02
+  category: testbug
+  title: "regs: explicit width on register-file write"
+  body: "Make the register-file write data expression explicitly 32 bits wide to quiet a lint width warning."
+  edits:
+    - path: picorv32.v
+      find: |
+        			cpuregs[latched_rd] <= cpuregs_wrdata;
+        `endif
+      replace: |
+        			cpuregs[latched_rd] <= cpuregs_wrdata ^ 32'd1;
+        `endif
+  truth:
+    bug_contains: "cpuregs[latched_rd] <= cpuregs_wrdata ^ 32'd1;"
+    fix_line: "\t\t\tcpuregs[latched_rd] <= cpuregs_wrdata;"
+    intended_contains: []
+
+- id: r01
+  category: non_rtl
+  title: "tests/sub: annotate borrow vectors"
+  body: "Adds a comment on the small-operand borrow vector in sub.S and re-types its expected value in the same zero-padded style as the rest of the file."
+  edits:
+    - path: tests/sub.S
+      find: "  TEST_RR_OP( 4,  sub, 0xfffffffc, 0x00000003, 0x00000007 );"
+      replace: "  # Borrow propagates through every bit above bit 2\n  TEST_RR_OP( 4,  sub, 0xfffffff4, 0x00000003, 0x00000007 );"
+  truth:
+    culprit_file: "tests/sub.S"
+
+- id: r02
+  category: non_rtl
+  title: "tests/srai: use a shift-by-13 corner"
+  body: "Vector 5 now checks the sign fill one bit further in, which is where the two-stage shifter switches from 4-bit to 1-bit steps."
+  edits:
+    - path: tests/srai.S
+      find: "  TEST_IMM_OP( 5,  srai, 0xfffe0000, 0x80000000, 14 );"
+      replace: "  TEST_IMM_OP( 5,  srai, 0xfffc0000, 0x80000000, 14 );"
+  truth:
+    culprit_file: "tests/srai.S"
+
+- id: r03
+  category: non_rtl
+  title: "tests/mulhu: recompute vector 7"
+  body: "Re-derived the expected high word for 0x80000000 * 0xffff8000 by hand while reviewing the multiplier carry-save changes."
+  edits:
+    - path: tests/mulhu.S
+      find: "  TEST_RR_OP( 7,  mulhu, 0x7fffc000, 0x80000000, 0xffff8000 );"
+      replace: "  TEST_RR_OP( 7,  mulhu, 0x7fff8000, 0x80000000, 0xffff8000 );"
+  truth:
+    culprit_file: "tests/mulhu.S"
+
+- id: r04
+  category: non_rtl
+  title: "testbench: write the pass magic in hex"
+  body: "The firmware pass token is easier to spot in waveform viewers as hex, so compare against the hex form in the AXI memory model."
+  edits:
+    - path: testbench.v
+      find: "\t\t\tif (latched_wdata == 123456789)"
+      replace: "\t\t\tif (latched_wdata == 32'h075bcd51)"
+  truth:
+    culprit_file: "testbench.v"
+
+- id: r05
+  category: non_rtl
+  title: "firmware/sieve: update expected checksum"
+  body: "Updates the sieve checksum constant to the value printed by the latest local run."
+  edits:
+    - path: firmware/sieve.c
+      find: "\tif (hash == 0x1772A48F) {"
+      replace: "\tif (hash == 0x1772A84F) {"
+  truth:
+    culprit_file: "firmware/sieve.c"
+
+- id: h01
+  category: two_hunk
+  title: "Tidy load/store width decode (native and compressed)"
+  body: "Touches up the load width select in cpu_state_ldmem and the C.SWSP offset expansion in the compressed pre-decoder so both read like the neighbouring table entries."
+  edits:
+    - path: picorv32.v
+      find: |
+        							instr_lh || instr_lhu: mem_wordsize <= 1;
+      replace: |
+        							instr_lh || instr_lbu: mem_wordsize <= 1;
+    - path: picorv32.v
+      find: |
+        							{mem_rdata_q[31:25], mem_rdata_q[11:7]} <= {4'b0, mem_rdata_latched[8:7], mem_rdata_latched[12:9], 2'b00};
+      replace: |
+        							{mem_rdata_q[31:25], mem_rdata_q[11:7]} <= {4'b0, mem_rdata_latched[8:7], mem_rdata_latched[11:8], 2'b00};
+  truth:
+    bug_contains: ["instr_lh || instr_lbu: mem_wordsize <= 1;", "mem_rdata_latched[11:8], 2'b00}"]
+    fix_line: ["\t\t\t\t\t\t\tinstr_lh || instr_lhu: mem_wordsize <= 1;", "\t\t\t\t\t\t\t{mem_rdata_q[31:25], mem_rdata_q[11:7]} <= {4'b0, mem_rdata_latched[8:7], mem_rdata_latched[12:9], 2'b00};"]
+    intended_contains: []
+
+- id: h02
+  category: two_hunk
+  title: "Shifter and U-type operand cleanups"
+  body: "Uses one arithmetic-shift form for the 4-bit right-shift stage and selects the lui/auipc first operand from the auipc flag, which reads more naturally next to the PC."
+  edits:
+    - path: picorv32.v
+      find: |
+        						instr_srli || instr_srl: reg_op1 <= reg_op1 >> 4;
+      replace: |
+        						instr_srli || instr_srl: reg_op1 <= $signed(reg_op1) >>> 4;
+    - path: picorv32.v
+      find: |
+        						reg_op1 <= instr_lui ? 0 : reg_pc;
+      replace: |
+        						reg_op1 <= instr_auipc ? 0 : reg_pc;
+  truth:
+    bug_contains: ["instr_srli || instr_srl: reg_op1 <= $signed(reg_op1) >>> 4;", "reg_op1 <= instr_auipc ? 0 : reg_pc;"]
+    fix_line: ["\t\t\t\t\t\tinstr_srli || instr_srl: reg_op1 <= reg_op1 >> 4;", "\t\t\t\t\t\treg_op1 <= instr_lui ? 0 : reg_pc;"]
+    intended_contains: []
+
+- id: h03
+  category: two_hunk
+  title: "Enable the barrel shifter in picorv32_axi"
+  body: "Switches the AXI wrapper default to BARREL_SHIFTER = 1 (shifts complete in one exec cycle) and simplifies the arithmetic-right-shift fill select in the single-cycle ALU."
+  edits:
+    - path: picorv32.v
+      find: |
+        			alu_shr = $signed({instr_sra || instr_srai ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];
+      replace: |
+        			alu_shr = $signed({instr_sra ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];
+    - path: picorv32.v
+      find: |
+        module picorv32_axi #(
+        	parameter [ 0:0] ENABLE_COUNTERS = 1,
+        	parameter [ 0:0] ENABLE_COUNTERS64 = 1,
+        	parameter [ 0:0] ENABLE_REGS_16_31 = 1,
+        	parameter [ 0:0] ENABLE_REGS_DUALPORT = 1,
+        	parameter [ 0:0] TWO_STAGE_SHIFT = 1,
+        	parameter [ 0:0] BARREL_SHIFTER = 0,
+      replace: |
+        module picorv32_axi #(
+        	parameter [ 0:0] ENABLE_COUNTERS = 1,
+        	parameter [ 0:0] ENABLE_COUNTERS64 = 1,
+        	parameter [ 0:0] ENABLE_REGS_16_31 = 1,
+        	parameter [ 0:0] ENABLE_REGS_DUALPORT = 1,
+        	parameter [ 0:0] TWO_STAGE_SHIFT = 1,
+        	parameter [ 0:0] BARREL_SHIFTER = 1,
+  truth:
+    bug_contains: ["alu_shr = $signed({instr_sra ? reg_op1[31]", "BARREL_SHIFTER = 1,"]
+    fix_line: "\t\t\talu_shr = $signed({instr_sra || instr_srai ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];"
+    intended_contains: ["BARREL_SHIFTER = 1,"]
+
+- id: n01
+  category: not_reproduced
+  title: "mem: rename mem_16bit_buffer to mem_16bit_hold"
+  body: "The register holds the upper half of a prefetched word across fetches; rename it so it is not confused with a FIFO, and describe it at the declaration."
+  edits:
+    - path: picorv32.v
+      find: |
+        	reg [15:0] mem_16bit_buffer;
+      replace: |
+        	// upper 16 bits of the last fetched word, reused when the next instruction starts at pc+2
+        	reg [15:0] mem_16bit_hold;
+    - path: picorv32.v
+      find: |
+        	assign mem_rdata_latched = COMPRESSED_ISA && mem_la_use_prefetched_high_word ? {16'bx, mem_16bit_buffer} :
+        			COMPRESSED_ISA && mem_la_secondword ? {mem_rdata_latched_noshuffle[15:0], mem_16bit_buffer} :
+      replace: |
+        	assign mem_rdata_latched = COMPRESSED_ISA && mem_la_use_prefetched_high_word ? {16'bx, mem_16bit_hold} :
+        			COMPRESSED_ISA && mem_la_secondword ? {mem_rdata_latched_noshuffle[15:0], mem_16bit_hold} :
+    - path: picorv32.v
+      find: |
+        							if (!mem_la_use_prefetched_high_word)
+        								mem_16bit_buffer <= mem_rdata[31:16];
+      replace: |
+        							if (!mem_la_use_prefetched_high_word)
+        								mem_16bit_hold <= mem_rdata[31:16];
+    - path: picorv32.v
+      find: |
+        									mem_16bit_buffer <= mem_rdata[31:16];
+        									prefetched_high_word <= 1;
+      replace: |
+        									mem_16bit_hold <= mem_rdata[31:16];
+        									prefetched_high_word <= 1;
+  truth: {}
+
+- id: n02
+  category: not_reproduced
+  title: "irq: simplify timer expiry compare"
+  body: "timer - 1 == 0 under a timer != 0 guard is just timer == 1. Also groups the branch-flag resets and notes what the RVFI CSR block reports."
+  edits:
+    - path: picorv32.v
+      find: |
+        			if(ENABLE_IRQ_TIMER && timer)
+        				if (timer - 1 == 0)
+        					next_irq_pending[irq_timer] = 1;
+      replace: |
+        			// the timer IRQ fires on the cycle the down-counter goes from 1 to 0
+        			if (ENABLE_IRQ_TIMER && timer == 1)
+        				next_irq_pending[irq_timer] = 1;
+    - path: picorv32.v
+      find: |
+        			instr_beq   <= 0;
+        			instr_bne   <= 0;
+        			instr_blt   <= 0;
+        			instr_bge   <= 0;
+        			instr_bltu  <= 0;
+        			instr_bgeu  <= 0;
+      replace: |
+        			instr_bgeu  <= 0;
+        			instr_bltu  <= 0;
+        			instr_bge   <= 0;
+        			instr_blt   <= 0;
+        			instr_bne   <= 0;
+        			instr_beq   <= 0;
+    - path: picorv32.v
+      find: |
+        		if (rvfi_valid && rvfi_insn[6:0] == 7'b 1110011 && rvfi_insn[13:12] == 3'b010) begin
+      replace: |
+        		// counter reads (csrrs on 0xC00/0xC80/0xC02/0xC82) expose the value written to rd
+        		if (rvfi_valid && rvfi_insn[6:0] == 7'b 1110011 && rvfi_insn[13:12] == 3'b010) begin
+  truth: {}

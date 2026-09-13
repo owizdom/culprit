@@ -1,0 +1,6 @@
+{
+  "id": "m04",
+  "category": "multi_hunk",
+  "title": "compressed decoder: comment the C.SUB/C.XOR/C.OR/C.AND funct3 map",
+  "body": "Documents the funct2 to funct3 mapping in the compressed pre-decoder and cross-references it from the second decode stage. Also labels the RVFI CSR observation ports."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "x25",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate is_lbu_lhu_lw and dbg_rs1val",
+  "body": "Adds short comments next to the is_lbu_lhu_lw and dbg_rs1val assignments so the decoder code is easier to follow. No functional change intended."
+}

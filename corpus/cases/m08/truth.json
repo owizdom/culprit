@@ -1,0 +1,42 @@
+{
+  "bug_contains": "decoded_imm_j[7], decoded_imm_j[6]",
+  "fix_line": "\t\t\t\t  decoded_imm_j[6], decoded_imm_j[7], decoded_imm_j[3:1], decoded_imm_j[5], decoded_imm_j[0] } <= $signed({mem_rdata_latched[12:2], 1'b0});",
+  "intended_contains": [
+    "C.J / C.JAL: insn[12:2] holds offset bits"
+  ],
+  "category": "multi_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 896,
+      "changed": [
+        899,
+        900,
+        901
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1528,
+      "changed": [
+        1531
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1984,
+      "changed": [
+        1987
+      ]
+    }
+  ],
+  "bug_lines": [
+    901
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

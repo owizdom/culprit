@@ -1,0 +1,6 @@
+{
+  "id": "x14",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate timer, re-indent dbg_insn_rs1",
+  "body": "Small readability pass while reading the decoder code: a short comment next to the timer assignment and the dbg_insn_rs1 assignment re-indented. No functional change intended."
+}

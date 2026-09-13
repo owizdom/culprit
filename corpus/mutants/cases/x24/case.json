@@ -1,0 +1,6 @@
+{
+  "id": "x24",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate dbg_rs1val_valid, re-indent alu_add_sub",
+  "body": "Small readability pass while reading the cpu code: a short comment next to the dbg_rs1val_valid assignment and the alu_add_sub assignment re-indented. No functional change intended."
+}

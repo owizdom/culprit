@@ -1,0 +1,6 @@
+{
+  "id": "x17",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate instr_lui and decoded_rs1",
+  "body": "Adds short comments next to the instr_lui and decoded_rs1 assignments so the decoder code is easier to follow. No functional change intended."
+}

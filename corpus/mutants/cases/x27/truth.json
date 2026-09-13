@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1016,
+      "changed": [
+        1019
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1059,
+      "changed": [
+        1062
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1692,
+      "changed": [
+        1695
+      ]
+    }
+  ],
+  "bug_lines": [
+    1019
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\t\t\t\t\t\t\tif (mem_rdata_latched[12] != 0 && mem_rdata_latched[6:2] != 0) begin // C.ADD",
+  "intended_contains": [
+    "// instr_andi for the instruction in this cycle",
+    "cpu_state <= cpu_state_fetch; // cpu_state for the instruction in this cycle"
+  ],
+  "mutation": {
+    "line": 1019,
+    "base_line": 1019,
+    "from": "!=",
+    "to": "==",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1062,
+      "kind": "comment_above",
+      "text": "// instr_andi for the instruction in this cycle"
+    },
+    {
+      "base_line": 1694,
+      "kind": "trailing_comment",
+      "text": "cpu_state <= cpu_state_fetch; // cpu_state for the instruction in this cycle"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "culprit_file": "tests/srai.S",
+  "category": "non_rtl",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "tests/srai.S",
+      "new_start": 20,
+      "changed": [
+        23
+      ]
+    }
+  ]
+}

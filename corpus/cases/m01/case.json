@@ -1,0 +1,6 @@
+{
+  "id": "m01",
+  "category": "multi_hunk",
+  "title": "decoder: document funct3 encodings",
+  "body": "Adds a short funct3 reference next to the instruction decoder and annotates the RVFI mode/ixl constants. While in there I re-checked the conditional branch decode table against the spec."
+}

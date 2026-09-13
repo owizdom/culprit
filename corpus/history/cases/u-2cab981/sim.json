@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "div"
+  ],
+  "trap_cycle": 110369,
+  "seconds": 0.0,
+  "kept": true
+}

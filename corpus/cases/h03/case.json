@@ -1,0 +1,6 @@
+{
+  "id": "h03",
+  "category": "two_hunk",
+  "title": "Enable the barrel shifter in picorv32_axi",
+  "body": "Switches the AXI wrapper default to BARREL_SHIFTER = 1 (shifts complete in one exec cycle) and simplifies the arithmetic-right-shift fill select in the single-cycle ALU."
+}

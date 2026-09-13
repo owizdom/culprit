@@ -1,0 +1,6 @@
+{
+  "id": "r03",
+  "category": "non_rtl",
+  "title": "tests/mulhu: recompute vector 7",
+  "body": "Re-derived the expected high word for 0x80000000 * 0xffff8000 by hand while reviewing the multiplier carry-save changes."
+}

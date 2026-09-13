@@ -1,0 +1,6 @@
+{
+  "id": "x26",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate trace_data",
+  "body": "Adds a short comment next to the trace_data assignment so the cpu code is easier to follow. No functional change intended."
+}

@@ -1,0 +1,5 @@
+# Icarus Verilog as GitHub CI gets it: the ubuntu:noble (24.04) apt package, version 12.
+FROM ubuntu:noble
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends iverilog \
+ && rm -rf /var/lib/apt/lists/*

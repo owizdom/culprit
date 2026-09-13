@@ -1,0 +1,6 @@
+{
+  "id": "r05",
+  "category": "non_rtl",
+  "title": "firmware/sieve: update expected checksum",
+  "body": "Updates the sieve checksum constant to the value printed by the latest local run."
+}

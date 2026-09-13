@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 860,
+      "changed": [
+        863
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 909,
+      "changed": [
+        912
+      ]
+    }
+  ],
+  "bug_lines": [
+    912
+  ],
+  "bug_hunks": [
+    2
+  ],
+  "fix_line": "\t\t\t\t\t\t\t\tdecoded_rs1 <= 8 + mem_rdata_latched[9:7];",
+  "intended_contains": [
+    "is_lbu_lhu_lw <= |{instr_lbu, instr_lhu, instr_lw}; // is_lbu_lhu_lw for the instruction in this cycle"
+  ],
+  "mutation": {
+    "line": 912,
+    "base_line": 912,
+    "from": "+",
+    "to": "-",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 863,
+      "kind": "trailing_comment",
+      "text": "is_lbu_lhu_lw <= |{instr_lbu, instr_lhu, instr_lw}; // is_lbu_lhu_lw for the instruction in this cycle"
+    }
+  ]
+}

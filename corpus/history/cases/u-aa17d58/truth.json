@@ -1,0 +1,31 @@
+{
+  "category": "upstream_bug",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 475,
+      "changed": [
+        478
+      ]
+    }
+  ],
+  "bug_lines": [
+    478
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "bug_is_missing_code": false,
+  "intended_contains": [],
+  "upstream_fix": [
+    {
+      "path": "picorv32.v",
+      "start": 475,
+      "end": 481,
+      "bug_text": "\t\t\t\t\t\t\t\tmem_rdata_q[31:25] <= 7'b0000000;\n\t\t\t\t\t\t\t\tmem_rdata_q[14:12] <= 3'b 101;\n\t\t\t\t\t\t\tend\n\t\t\t\t\t\t\tif (mem_rdata_latched[11:10] == 2'b00) begin // C.SRAI\n\t\t\t\t\t\t\t\tmem_rdata_q[31:25] <= 7'b0100000;\n\t\t\t\t\t\t\t\tmem_rdata_q[14:12] <= 3'b 101;\n\t\t\t\t\t\t\tend\n",
+      "replacement": "\t\t\t\t\t\t\t\tmem_rdata_q[31:25] <= 7'b0000000;\n\t\t\t\t\t\t\t\tmem_rdata_q[14:12] <= 3'b 101;\n\t\t\t\t\t\t\tend\n\t\t\t\t\t\t\tif (mem_rdata_latched[11:10] == 2'b01) begin // C.SRAI\n\t\t\t\t\t\t\t\tmem_rdata_q[31:25] <= 7'b0100000;\n\t\t\t\t\t\t\t\tmem_rdata_q[14:12] <= 3'b 101;\n\t\t\t\t\t\t\tend\n"
+    }
+  ],
+  "commit": "aa17d587843a78e3d49b5e24bc5e4ab76e8c6383"
+}

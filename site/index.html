@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CULPRIT: a debugging agent for chip teams</title>
+<meta name="description" content="A debugging agent for chip teams. One agent across GitHub, Linear and Slack: when a pull request turns the simulation tests red, it proves which line did it with the simulator, fixes it, and tells the team.">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3; --bg-2: #f3eee4; --panel: #fffdf9; --border: #e8e0d2; --border-strong: #d8cdb9;
+    --text: #2a2119; --text-2: #6b5f50; --text-3: #a09381; --red: #c53030; --green: #2f7d4f;
+    --dark: #1a1612; --dark-panel: #221c17; --dark-border: #3a312a; --dark-text: #f1e9dd; --dark-text-2: #b9ad9c;
+    --sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding-inline: 24px; }
+  .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  nav .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.18em; font-size: 14px; text-decoration: none; }
+  .brand img { width: 26px; height: 26px; }
+  nav .links { display: flex; gap: 22px; margin-left: auto; font-size: 14px; color: var(--text-2); }
+  nav .links a { text-decoration: none; }
+  nav .links a:hover { color: var(--text); }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 22px; border-radius: 11px; font-weight: 500; font-size: 15px; text-decoration: none; border: 1px solid var(--border-strong); background: var(--panel); white-space: nowrap; }
+  .btn-primary { background: var(--text); border-color: var(--text); color: var(--bg); }
+  .btn-sm { height: 36px; padding: 0 14px; font-size: 14px; border-radius: 9px; }
+
+  .hero { padding-block: 88px 64px; }
+  .hero h1 { margin: 20px 0 0; font-size: clamp(48px, 7.4vw, 96px); line-height: 0.98; letter-spacing: -0.02em; max-width: 900px; }
+  .hero .lead { max-width: 680px; margin: 26px 0 0; font-size: 19px; color: var(--text-2); }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .shot { margin-top: 64px; border-radius: 18px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(42,33,25,.05), 0 30px 80px rgba(42,33,25,.14); background: var(--panel); }
+
+  section { padding-block: 88px; }
+  h2 { margin: 12px 0 0; font-size: clamp(36px, 5vw, 56px); line-height: 1.04; max-width: 820px; }
+  .sub { margin: 18px 0 0; max-width: 720px; color: var(--text-2); font-size: 18px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+  .stat { padding: 26px; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 60px; line-height: 1; }
+  .stat p { margin: 12px 0 0; color: var(--text-2); font-size: 15px; }
+  .stat small { display: block; margin-top: 10px; color: var(--text-3); font-size: 12.5px; }
+
+  .dark { background: var(--dark); color: var(--dark-text); }
+  .dark .eyebrow { color: #84786a; }
+  .dark .sub { color: var(--dark-text-2); }
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 48px; }
+  .step { padding: 24px; background: var(--dark-panel); border: 1px solid var(--dark-border); border-radius: 16px; }
+  .step .num { font-family: var(--mono); color: #ff6b62; font-size: 13px; }
+  .step h3 { margin: 12px 0 8px; font-size: 19px; font-weight: 600; }
+  .step p { margin: 0; color: var(--dark-text-2); font-size: 15px; }
+
+  .apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+  .app { padding: 26px; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; }
+  .app .icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 11px; background: var(--bg-2); border: 1px solid var(--border); }
+  .app h3 { margin: 16px 0 6px; font-size: 20px; }
+  .app p { margin: 0; color: var(--text-2); font-size: 15px; }
+  .app ul { margin: 14px 0 0; padding-left: 18px; color: var(--text-2); font-size: 14.5px; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  .pair .shot { margin-top: 0; }
+
+  .table-wrap { margin-top: 40px; overflow-x: auto; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 640px; }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { font-weight: 500; color: var(--text-2); background: var(--bg-2); font-size: 14px; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-family: var(--mono); font-size: 14px; }
+  td.best { color: var(--green); }
+  .note { margin-top: 16px; color: var(--text-2); font-size: 14.5px; max-width: 820px; }
+
+  .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 40px; margin-top: 44px; }
+  .faq h3 { margin: 0 0 6px; font-size: 18px; }
+  .faq p { margin: 0; color: var(--text-2); font-size: 15px; }
+
+  pre { margin: 24px 0 0; padding: 18px 20px; border-radius: 12px; background: var(--dark); color: var(--dark-text); font: 14px/1.7 var(--mono); overflow-x: auto; }
+  .final { text-align: center; }
+  .final h2 { margin-inline: auto; }
+  .final .sub { margin-inline: auto; }
+  .final .cta { display: flex; justify-content: center; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  footer { padding-block: 36px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; }
+
+  @media (max-width: 860px) {
+    nav .links { display: none; }
+    .stats, .steps, .apps, .pair, .faq { grid-template-columns: minmax(0, 1fr); }
+    .hero { padding-block: 56px 40px; }
+    section { padding-block: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo-mark.svg" alt="">CULPRIT</a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#tools">Tools</a>
+      <a href="#proof">Proof</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-sm" href="https://github.com/owizdom/culprit">View on GitHub</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 class="serif">A debugging agent for chip teams.</h1>
+    <p class="lead">One agent across GitHub, Linear and Slack. When a pull request turns the simulation tests red, CULPRIT proves which line did it with the simulator, fixes it, and tells your team.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#run">Install on Mac or Windows</a>
+      <a class="btn" href="https://github.com/owizdom/culprit">View on GitHub</a>
+    </div>
+    <div class="shot"><img src="img/app-investigation.png" alt="The CULPRIT window: a pull request investigation with the fix, the bug path and the steps."></div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2 class="serif">A red regression costs a verification engineer hours.</h2>
+    <p class="sub">Chips are written as code and checked by simulation. When a change breaks a test, someone reads logs and waveforms until the guilty line turns up. It is the most expensive kind of waiting in chip design.</p>
+    <div class="stats">
+      <div class="stat"><b>14%</b><p>of IC and ASIC projects reach first-silicon success.</p><small>Siemens / Wilson Research Group, 2024 functional verification study</small></div>
+      <div class="stat"><b>47%</b><p>of a verification engineer's time goes to debug, the largest single share.</p><small>Wilson Research Group study, as cited by Sigasi</small></div>
+      <div class="stat"><b>1 line</b><p>is usually the cause. CULPRIT names it, with the simulator runs that prove it.</p><small>Measured on 23 seeded RTL bugs, see the proof below</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2 class="serif">From a red CI run to a closed issue.</h2>
+    <p class="sub">Every claim CULPRIT makes is tagged: CONFIRMED when a simulator or a netlist proved it, PROPOSED when it is only a suggestion.</p>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>CI turns red</h3><p>A pull request breaks the chip's simulation tests. CULPRIT re-runs them on the pull request and on its base to make sure the failure is real.</p></div>
+      <div class="step"><div class="num">02</div><h3>It proves the cause</h3><p>Edits that cannot change the circuit are ruled out with zero simulations. The rest are undone one at a time until one edit is proven guilty.</p></div>
+      <div class="step"><div class="num">03</div><h3>It fixes the line</h3><p>A fix that keeps the author's change counts only once every test passes. It also traces, clock cycle by clock cycle, how the bug travelled through the CPU.</p></div>
+      <div class="step"><div class="num">04</div><h3>It tells the team</h3><p>The fix lands as a suggestion on the pull request line, an issue in Linear and a thread in Slack. When CI goes green, the loop closes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="wrap">
+    <div class="eyebrow">Connects to your tools</div>
+    <h2 class="serif">The answer goes where your team already works.</h2>
+    <p class="sub">Connect each app from the first-run screen. Every connection is checked live before anything is saved, and tokens stay on your machine.</p>
+    <div class="apps">
+      <div class="app">
+        <div class="icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="4" cy="3.5" r="1.6"/><circle cx="4" cy="12.5" r="1.6"/><circle cx="12" cy="12.5" r="1.6"/><path d="M4 5.1v5.8M12 10.9V7.2a2 2 0 0 0-2-2H7.2M8.6 3.6L7 5.2l1.6 1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>GitHub</h3>
+        <p>Watches your CI and suggests the fix on the exact line.</p>
+        <ul><li>A one-click suggestion, only when the fix passed every test</li><li>A commit status that goes green when CI does</li><li>Never pushes, merges or approves</li></ul>
+      </div>
+      <div class="app">
+        <div class="icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.6"/><path d="M8 2.4a5.6 5.6 0 0 1 0 11.2z" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Linear</h3>
+        <p>One issue per broken pull request, written as a short report.</p>
+        <ul><li>What broke, why CULPRIT knows, and the fix</li><li>Assigned to the author of the pull request</li><li>Moved to Done when CI is green again</li></ul>
+      </div>
+      <div class="app">
+        <div class="icon"><svg viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.2 2.5L5 13.5M11 2.5L9.8 13.5M2.8 6h11M2.2 10h11"/></svg></div>
+        <h3>Slack</h3>
+        <p>One thread per pull request in your team's channel.</p>
+        <ul><li>A status message kept up to date in place</li><li>A reply for each commit it analyses</li><li>Run it twice and nothing is posted twice</li></ul>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="shot"><img src="img/app-welcome.png" alt="The CULPRIT welcome screen."></div>
+      <div class="shot"><img src="img/app-connect.png" alt="Connecting GitHub in CULPRIT: sign in, use the GitHub CLI login, or paste a token."></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof" style="background: var(--bg-2)">
+  <div class="wrap">
+    <div class="eyebrow">The proof</div>
+    <h2 class="serif">Measured on 30 broken pull requests, ties reported as ties.</h2>
+    <p class="sub">Each case is a seeded pull request on the PicoRV32 RISC-V CPU with its true culprit known. CULPRIT is compared with an LLM given the same pull request and log, and with delta debugging that uses no model.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Measure</th><th>LLM only</th><th>Delta debugging</th><th>CULPRIT</th></tr></thead>
+        <tbody>
+          <tr><td>Culprit edit found</td><td class="num">19/23</td><td class="num">23/23</td><td class="num best">23/23</td></tr>
+          <tr><td>Exact line found</td><td class="num">21/23</td><td class="num">16/23</td><td class="num">19/23</td></tr>
+          <tr><td>Fix passes the tests</td><td class="num">19/23</td><td class="num">19/23</td><td class="num best">23/23</td></tr>
+          <tr><td>Fix keeps the author's work</td><td class="num">18/19</td><td class="num">9/19</td><td class="num">16/19</td></tr>
+          <tr><td>Wrong blame (lower is better)</td><td class="num">2/30</td><td class="num">0/30</td><td class="num best">0/30</td></tr>
+          <tr><td>Correct when the chip is not at fault</td><td class="num">7/7</td><td class="num">7/7</td><td class="num">7/7</td></tr>
+          <tr><td>Median time per case</td><td class="num">5.5 s</td><td class="num">0.7 s</td><td class="num">0.7 s</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">At this size most differences are within noise. The LLM alone names the exact line more often, but 4 of its fixes fail the tests and its answer does not say which. Every culprit CULPRIT reports was confirmed by a simulation. The test suite catches 37 of 40 seeded single-token mutants; the bugs it misses are invisible to CULPRIT too. Icarus Verilog 12, which CI installs, and Icarus Verilog 13 give byte-identical simulator logs on all 31 runs.</p>
+    <p class="note">Beyond these 30: across 65 cases, including 35 generated pull requests that hide a real bug among harmless edits, CULPRIT found the culprit edit in 58 of 58, its fix passed every test in 58 of 58, and it blamed the wrong edit 0 times; the LLM alone did so 5 times. Over three runs CULPRIT's grades were identical on all 30 seeded cases. On two bugs taken from the PicoRV32 author's own fix history, its fix was the author's fix.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Specs and questions</div>
+    <h2 class="serif">What it runs on, and where it stops.</h2>
+    <div class="faq">
+      <div><h3>What does it run?</h3><p>The design's own regression in Icarus Verilog, netlists from Yosys, and firmware built with the RISC-V GCC toolchain. Today it targets PicoRV32; the loop is design-agnostic.</p></div>
+      <div><h3>What does the model do?</h3><p>Only the repair of lines that cannot simply be restored. Its patch is accepted only after the simulator passes it; otherwise it is labelled a proposal.</p></div>
+      <div><h3>Where are my tokens?</h3><p>In a file in your user data folder, readable only by you. Settings shows each connection's live status, lets you disconnect, and logs you out.</p></div>
+      <div><h3>What can it write?</h3><p>Review comments and commit statuses on the watched repository, its own Linear issues, and messages in one Slack channel. Everything else is refused before any network call.</p></div>
+      <div><h3>What are the limits?</h3><p>The firmware stops at the first failing test, a netlist proof holds for the testbench's parameters only, a bug the regression misses is invisible to CULPRIT, and the evidence so far covers one design, PicoRV32.</p></div>
+      <div><h3>Is it open?</h3><p>Yes. The code, the 30-case corpus and the evaluation scripts are in the repository.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="run" style="border-top: 1px solid var(--border)">
+  <div class="wrap">
+    <img src="logo-mark.svg" alt="" width="56" height="56" style="margin: 0 auto">
+    <h2 class="serif">Stop hunting for the culprit.</h2>
+    <p class="sub">One command on macOS or Windows. The first run checks your chip tools, then walks you through GitHub, Linear and Slack.</p>
+    <pre style="text-align: left; max-width: 620px; margin: 28px auto 0">uv tool install git+https://github.com/owizdom/culprit
+culprit</pre>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/owizdom/culprit#install">Install guide</a>
+      <a class="btn" href="https://github.com/owizdom/culprit">View on GitHub</a>
+    </div>
+    <p class="sub" style="font-size: 14px; margin-top: 18px">Needs uv (Python 3.12), plus Icarus Verilog and Yosys: Homebrew on macOS, OSS CAD Suite on Windows.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo-mark.svg" alt="">CULPRIT</a>
+    <span>Built on PicoRV32 by Claire Wolf and YosysHQ.</span>
+    <span>The simulator is the judge. The model only proposes.</span>
+  </div>
+</footer>
+
+</body>
+</html>

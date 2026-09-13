@@ -1,0 +1,6 @@
+{
+  "id": "a03",
+  "category": "bug_in_intended_edit",
+  "title": "ldmem: make load sign extension explicit",
+  "body": "Some downstream synthesis flows we use mishandle $signed() on part-selects inside case items. Spell out the sign extension for lh/lb with replication instead. Pure rewrite of the same logic."
+}

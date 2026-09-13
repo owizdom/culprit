@@ -1,0 +1,52 @@
+{
+  "bug_contains": "mem_rdata_q[31:20] == 12'hc02",
+  "fix_line": "\t\t\tinstr_rdinstr  <=  (mem_rdata_q[6:0] == 7'b1110011 && mem_rdata_q[31:20] == 12'hc02 && mem_rdata_q[19:15] == 5'd0 && mem_rdata_q[14:12] == 3'b010) && ENABLE_COUNTERS;",
+  "intended_contains": [
+    "is_counter_read",
+    "mem_rdata_q[31:20] == 12'hc82"
+  ],
+  "category": "multi_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 684,
+      "changed": [
+        687,
+        688
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1080,
+      "changed": [
+        1083,
+        1084,
+        1085
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1430,
+      "changed": [
+        1433
+      ]
+    },
+    {
+      "id": 4,
+      "path": "picorv32.v",
+      "new_start": 1625,
+      "changed": [
+        1628
+      ]
+    }
+  ],
+  "bug_lines": [
+    1084
+  ],
+  "bug_hunks": [
+    2
+  ]
+}

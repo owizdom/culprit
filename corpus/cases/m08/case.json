@@ -1,0 +1,6 @@
+{
+  "id": "m08",
+  "category": "multi_hunk",
+  "title": "decoder: document compressed jump offset layout",
+  "body": "Reflows the C.J/C.JAL offset shuffle with a comment giving the RVC bit order, puts the fetch-state latch clears in declaration order, and notes the rvfi rs1/rs2 address gating."
+}

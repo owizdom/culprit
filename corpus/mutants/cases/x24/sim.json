@@ -1,0 +1,11 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "mulh"
+  ],
+  "trap_cycle": 87027,
+  "seconds": 2.8,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

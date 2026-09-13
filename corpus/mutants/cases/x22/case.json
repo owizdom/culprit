@@ -1,0 +1,6 @@
+{
+  "id": "x22",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate instr_timer and reg_out",
+  "body": "Adds short comments next to the instr_timer and reg_out assignments so the decoder code is easier to follow. No functional change intended."
+}

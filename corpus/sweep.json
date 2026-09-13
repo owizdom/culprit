@@ -1,0 +1,286 @@
+{
+  "killed": 37,
+  "total": 40,
+  "mutants": [
+    {
+      "line": 862,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1602,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 788,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1606,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 521,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 622,
+      "from": "!=",
+      "to": "==",
+      "killed": false,
+      "status": "pass"
+    },
+    {
+      "line": 1569,
+      "from": "+",
+      "to": "-",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 611,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1188,
+      "from": "==",
+      "to": "!=",
+      "killed": false,
+      "status": "pass"
+    },
+    {
+      "line": 876,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1734,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 992,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1714,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1675,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1701,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1064,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1749,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1404,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1079,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1165,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1097,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 466,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 958,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 877,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1935,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1869,
+      "from": "+",
+      "to": "-",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1059,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 442,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1771,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 796,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1480,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 946,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 876,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1544,
+      "from": "|",
+      "to": "&",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1077,
+      "from": "==",
+      "to": "!=",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 596,
+      "from": "==",
+      "to": "!=",
+      "killed": false,
+      "status": "pass"
+    },
+    {
+      "line": 1020,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 1426,
+      "from": "-",
+      "to": "+",
+      "killed": true,
+      "status": "fail"
+    },
+    {
+      "line": 1599,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    },
+    {
+      "line": 877,
+      "from": "<=",
+      "to": "<",
+      "killed": true,
+      "status": "compile_error"
+    }
+  ]
+}

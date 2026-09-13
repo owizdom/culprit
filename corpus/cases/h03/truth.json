@@ -1,0 +1,37 @@
+{
+  "bug_contains": [
+    "alu_shr = $signed({instr_sra ? reg_op1[31]",
+    "BARREL_SHIFTER = 1,"
+  ],
+  "fix_line": "\t\t\talu_shr = $signed({instr_sra || instr_srai ? reg_op1[31] : 1'b0, reg_op1}) >>> reg_op2[4:0];",
+  "intended_contains": [
+    "BARREL_SHIFTER = 1,"
+  ],
+  "category": "two_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1242,
+      "changed": [
+        1245
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 2520,
+      "changed": [
+        2523
+      ]
+    }
+  ],
+  "bug_lines": [
+    1245,
+    2523
+  ],
+  "bug_hunks": [
+    1,
+    2
+  ]
+}

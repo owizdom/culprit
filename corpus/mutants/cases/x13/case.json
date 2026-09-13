@@ -1,0 +1,6 @@
+{
+  "id": "x13",
+  "category": "mutant_with_decoys",
+  "title": "mem: annotate mem_addr, re-indent dbg_insn_opcode",
+  "body": "Small readability pass while reading the mem code: a short comment next to the mem_addr assignment and the dbg_insn_opcode assignment re-indented. No functional change intended."
+}

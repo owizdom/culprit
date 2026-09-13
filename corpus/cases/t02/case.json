@@ -1,0 +1,6 @@
+{
+  "id": "t02",
+  "category": "testbug",
+  "title": "regs: explicit width on register-file write",
+  "body": "Make the register-file write data expression explicitly 32 bits wide to quiet a lint width warning."
+}

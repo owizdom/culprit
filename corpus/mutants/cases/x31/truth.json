@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1026,
+      "changed": [
+        1029
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 2225,
+      "changed": [
+        2228
+      ]
+    }
+  ],
+  "bug_lines": [
+    2228
+  ],
+  "bug_hunks": [
+    2
+  ],
+  "fix_line": "\t\tif (resetn && pcpi_valid && pcpi_insn[6:0] == 7'b0110011 && pcpi_insn[31:25] == 7'b0000001) begin",
+  "intended_contains": [
+    "// keep decoded_rs2 in this state"
+  ],
+  "mutation": {
+    "line": 2228,
+    "base_line": 2227,
+    "from": "==",
+    "to": "!=",
+    "module": "picorv32_pcpi_mul"
+  },
+  "decoys": [
+    {
+      "base_line": 1029,
+      "kind": "comment_above",
+      "text": "// keep decoded_rs2 in this state"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "x31",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate decoded_rs2",
+  "body": "Adds a short comment next to the decoded_rs2 assignment so the decoder code is easier to follow. No functional change intended."
+}

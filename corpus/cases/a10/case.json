@@ -1,0 +1,6 @@
+{
+  "id": "a10",
+  "category": "bug_in_intended_edit",
+  "title": "shift: add an 8-bit stage to the sequential shifter",
+  "body": "Large shift amounts spend up to 10 cycles in cpu_state_shift. Add an 8-bit step ahead of the existing 4-bit step when TWO_STAGE_SHIFT is set; results are unchanged, shifts by 8+ finish sooner."
+}

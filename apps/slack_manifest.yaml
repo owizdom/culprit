@@ -1,0 +1,25 @@
+# Paste at api.slack.com/apps -> Create New App -> From a manifest, install it, then put the Bot User
+# OAuth Token in .env as SLACK_BOT_TOKEN and the channel id in config.yaml. Invite the bot to that channel.
+# chat:write posts the parent and replies; channels:history (groups:history for a private channel) lets a
+# rerun find its own messages by metadata instead of posting again.
+_metadata:
+  major_version: 2
+  minor_version: 1
+display_information:
+  name: CULPRIT
+  description: Finds the line that broke the chip regression, proves it, and threads the fix here.
+  background_color: "#0b0d10"
+features:
+  bot_user:
+    display_name: culprit
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - channels:history
+      - groups:history
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

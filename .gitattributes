@@ -1,0 +1,6 @@
+# Simulator logs, Verilog and YAML are parsed line by line: keep LF endings on every OS, Windows included.
+* text=auto eol=lf
+*.png binary
+*.woff binary
+*.woff2 binary
+*.hex text eol=lf

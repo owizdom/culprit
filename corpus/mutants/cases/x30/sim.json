@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": null,
+  "trap_cycle": 241000,
+  "seconds": 8.0,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

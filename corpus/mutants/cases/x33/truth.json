@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 483,
+      "changed": [
+        486
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 2503,
+      "changed": [
+        2506
+      ]
+    }
+  ],
+  "bug_lines": [
+    486
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\t\t\t\t\t\tif (mem_rdata_latched[12:10] == 3'b011) begin // C.SUB, C.XOR, C.OR, C.AND",
+  "intended_contains": [
+    "// the quotient_msk register"
+  ],
+  "mutation": {
+    "line": 486,
+    "base_line": 486,
+    "from": "==",
+    "to": "!=",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 2506,
+      "kind": "comment_above",
+      "text": "// the quotient_msk register"
+    }
+  ]
+}

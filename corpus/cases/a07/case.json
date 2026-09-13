@@ -1,0 +1,6 @@
+{
+  "id": "a07",
+  "category": "bug_in_intended_edit",
+  "title": "pcpi: build the internal wait/ready OR one co-processor per line",
+  "body": "The internal PCPI handshake was two long reduction-ORs that are hard to diff when a co-processor is added. Accumulate wait and ready one enabled core per line instead; same logic."
+}

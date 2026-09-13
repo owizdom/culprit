@@ -1,0 +1,6 @@
+{
+  "id": "m03",
+  "category": "multi_hunk",
+  "title": "mem: small cleanups around look-ahead strobes and prefetch state",
+  "body": "Renames clear_prefetched_high_word_q to the _r suffix we use for plain registers, orders the trap/reset clears the same way as their declarations, and simplifies the halfword strobe select."
+}

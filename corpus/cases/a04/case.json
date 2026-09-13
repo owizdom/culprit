@@ -1,0 +1,6 @@
+{
+  "id": "a04",
+  "category": "bug_in_intended_edit",
+  "title": "irq: document which q-register each IRQ entry step writes",
+  "body": "Adds a comment for the two-step IRQ entry (q0 gets the return address, q1 the pending mask) and writes the q-register index as offset + step in both the QREGS and non-QREGS branches so they read the same way."
+}

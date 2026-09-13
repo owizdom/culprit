@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": "OUT-OF-BOUNDS MEMORY WRITE TO fc020038",
+  "trap_cycle": 8406,
+  "seconds": 0.2,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

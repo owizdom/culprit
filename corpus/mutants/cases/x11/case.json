@@ -1,0 +1,6 @@
+{
+  "id": "x11",
+  "category": "mutant_with_decoys",
+  "title": "mem: annotate mem_la_wdata and ack_awvalid",
+  "body": "Adds short comments next to the mem_la_wdata and ack_awvalid assignments so the mem code is easier to follow. No functional change intended."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "t01",
+  "category": "testbug",
+  "title": "regs: tidy register-file write",
+  "body": "Small cleanup of the register-file write statement in the non-PICORV32_REGS path. No functional change intended."
+}

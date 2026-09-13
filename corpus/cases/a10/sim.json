@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "lui"
+  ],
+  "trap_cycle": 35600,
+  "seconds": 0.0,
+  "kept": true
+}

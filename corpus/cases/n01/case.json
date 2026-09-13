@@ -1,0 +1,6 @@
+{
+  "id": "n01",
+  "category": "not_reproduced",
+  "title": "mem: rename mem_16bit_buffer to mem_16bit_hold",
+  "body": "The register holds the upper half of a prefetched word across fetches; rename it so it is not confused with a FIFO, and describe it at the declaration."
+}

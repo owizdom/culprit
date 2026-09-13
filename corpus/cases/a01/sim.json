@@ -1,0 +1,9 @@
+{
+  "head_status": "timeout",
+  "failure": [
+    "blt"
+  ],
+  "trap_cycle": 999900,
+  "seconds": 0.0,
+  "kept": true
+}

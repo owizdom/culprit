@@ -1,0 +1,6 @@
+{
+  "id": "a09",
+  "category": "bug_in_intended_edit",
+  "title": "alu: give blt/bltu explicit branch-condition items",
+  "body": "blt and bltu currently reach alu_out_0 through the shared slt/sltu items, which need the TWO_CYCLE_COMPARE guard. Add explicit one-line items next to bge/bgeu so all six branch conditions are listed together."
+}

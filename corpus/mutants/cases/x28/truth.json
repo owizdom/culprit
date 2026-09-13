@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1026,
+      "changed": [
+        1029
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1434,
+      "changed": [
+        1437
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1844,
+      "changed": [
+        1847
+      ]
+    }
+  ],
+  "bug_lines": [
+    1847
+  ],
+  "bug_hunks": [
+    3
+  ],
+  "fix_line": "\t\t\t\t\t\tinstr_slli || instr_sll: reg_op1 <= reg_op1 << 1;",
+  "intended_contains": [
+    "// decoded_rs2 in this cycle",
+    "\n\t\t\t\tcount_cycle <= 'bx;\n"
+  ],
+  "mutation": {
+    "line": 1847,
+    "base_line": 1846,
+    "from": "<<",
+    "to": ">>",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1029,
+      "kind": "comment_above",
+      "text": "// decoded_rs2 in this cycle"
+    },
+    {
+      "base_line": 1436,
+      "kind": "reindent",
+      "text": "\n\t\t\t\tcount_cycle <= 'bx;\n"
+    }
+  ]
+}

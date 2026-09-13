@@ -1,0 +1,6 @@
+{
+  "id": "x02",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate alu_out",
+  "body": "Adds a short comment next to the alu_out assignment so the cpu code is easier to follow. No functional change intended."
+}

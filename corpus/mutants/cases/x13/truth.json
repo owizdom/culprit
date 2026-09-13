@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 572,
+      "changed": [
+        575
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 819,
+      "changed": [
+        822
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1056,
+      "changed": [
+        1059
+      ]
+    }
+  ],
+  "bug_lines": [
+    1059
+  ],
+  "bug_hunks": [
+    3
+  ],
+  "fix_line": "\t\t\tinstr_slti  <= is_alu_reg_imm && mem_rdata_q[14:12] == 3'b010;",
+  "intended_contains": [
+    "// mem_addr in this cycle",
+    "\n\t\t\t\t\tdbg_insn_opcode = cached_insn_opcode;\n"
+  ],
+  "mutation": {
+    "line": 1059,
+    "base_line": 1058,
+    "from": "&&",
+    "to": "||",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 575,
+      "kind": "comment_above",
+      "text": "// mem_addr in this cycle"
+    },
+    {
+      "base_line": 821,
+      "kind": "reindent",
+      "text": "\n\t\t\t\t\tdbg_insn_opcode = cached_insn_opcode;\n"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "x20",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate reg_pc",
+  "body": "Adds a short comment next to the reg_pc assignment so the cpu code is easier to follow. No functional change intended."
+}

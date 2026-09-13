@@ -1,0 +1,26 @@
+{
+  "bug_contains": "{{24{mem_rdata_word[8]}}",
+  "fix_line": "\t\t\t\t\t\t\tlatched_is_lb: reg_out <= {{24{mem_rdata_word[7]}}, mem_rdata_word[7:0]};",
+  "intended_contains": [
+    "latched_is_lh: reg_out <= {{16{mem_rdata_word[15]}}, mem_rdata_word[15:0]};"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1900,
+      "changed": [
+        1903,
+        1905,
+        1906
+      ]
+    }
+  ],
+  "bug_lines": [
+    1906
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

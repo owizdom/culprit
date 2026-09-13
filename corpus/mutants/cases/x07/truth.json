@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1065,
+      "changed": [
+        1068
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1470,
+      "changed": [
+        1473
+      ]
+    }
+  ],
+  "bug_lines": [
+    1068
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\t\tinstr_add   <= is_alu_reg_reg && mem_rdata_q[14:12] == 3'b000 && mem_rdata_q[31:25] == 7'b0000000;",
+  "intended_contains": [
+    "irq_mask <= ~0; // keep irq_mask in this state"
+  ],
+  "mutation": {
+    "line": 1068,
+    "base_line": 1068,
+    "from": "&&",
+    "to": "||",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1473,
+      "kind": "trailing_comment",
+      "text": "irq_mask <= ~0; // keep irq_mask in this state"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "slli"
+  ],
+  "trap_cycle": 38318,
+  "seconds": 1.2,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

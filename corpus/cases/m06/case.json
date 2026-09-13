@@ -1,0 +1,6 @@
+{
+  "id": "m06",
+  "category": "multi_hunk",
+  "title": "cpu: bus-error check and reset block cleanups",
+  "body": "Makes the halfword misalignment check use the same two-bit compare style as the word check, orders the load-type latch resets lb/lh/lu, and adds a state list above the main state machine."
+}

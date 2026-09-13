@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": "Illegal Instruction at 0xFFFFF3",
+  "trap_cycle": 97273,
+  "seconds": 3.4,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

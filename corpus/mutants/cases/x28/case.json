@@ -1,0 +1,6 @@
+{
+  "id": "x28",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate decoded_rs2, re-indent count_cycle",
+  "body": "Small readability pass while reading the decoder code: a short comment next to the decoded_rs2 assignment and the count_cycle assignment re-indented. No functional change intended."
+}

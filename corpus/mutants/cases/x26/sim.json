@@ -1,0 +1,11 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "auipc"
+  ],
+  "trap_cycle": 36219,
+  "seconds": 1.1,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

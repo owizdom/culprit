@@ -1,0 +1,6 @@
+{
+  "id": "a02",
+  "category": "bug_in_intended_edit",
+  "title": "mem: replace narrow-read case tables with indexed part-selects",
+  "body": "The byte and halfword read muxes in the look-ahead always block were written as explicit case tables. Collapse them into one indexed part-select each; same behaviour, fewer lines to keep in sync with the strobe logic."
+}

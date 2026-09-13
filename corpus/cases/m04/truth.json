@@ -1,0 +1,42 @@
+{
+  "bug_contains": "== 2'b10) mem_rdata_q[14:12] <= 3'b111;",
+  "fix_line": "\t\t\t\t\t\t\t\tif (mem_rdata_latched[6:5] == 2'b10) mem_rdata_q[14:12] <= 3'b110;",
+  "intended_contains": [
+    "// funct2 (insn[6:5]) to funct3",
+    "(funct3 comes from the pre-decoder)"
+  ],
+  "category": "multi_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 143,
+      "changed": [
+        146
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 485,
+      "changed": [
+        488,
+        491
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 962,
+      "changed": [
+        965
+      ]
+    }
+  ],
+  "bug_lines": [
+    491
+  ],
+  "bug_hunks": [
+    2
+  ]
+}

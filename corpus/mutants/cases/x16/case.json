@@ -1,0 +1,6 @@
+{
+  "id": "x16",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate dbg_next and is_beq_bne_blt_bge_bltu_bgeu",
+  "body": "Adds short comments next to the dbg_next and is_beq_bne_blt_bge_bltu_bgeu assignments so the decoder code is easier to follow. No functional change intended."
+}

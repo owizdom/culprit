@@ -1,0 +1,11 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "lui"
+  ],
+  "trap_cycle": 12569,
+  "seconds": 0.4,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

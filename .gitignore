@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.cache/
+runs/*/
+runs/ledger.jsonl
+runs/watcher.json
+runs/testrun.json
+config.local.yaml
+brand/concepts/
+web/node_modules/
+/build/
+/dist/
+*.vcd
+*.vvp
+*.trace

@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1085,
+      "changed": [
+        1088
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1257,
+      "changed": [
+        1260
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1968,
+      "changed": [
+        1971
+      ]
+    }
+  ],
+  "bug_lines": [
+    1088
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\t\tinstr_fence <= (mem_rdata_q[6:0] == 7'b0001111 && !mem_rdata_q[14:12]);",
+  "intended_contains": [
+    "// alu_out_0 for this instruction",
+    "\n\t\t\t\t\treg_pc[1:0] <= 0;\n"
+  ],
+  "mutation": {
+    "line": 1088,
+    "base_line": 1088,
+    "from": "&&",
+    "to": "||",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1260,
+      "kind": "comment_above",
+      "text": "// alu_out_0 for this instruction"
+    },
+    {
+      "base_line": 1970,
+      "kind": "reindent",
+      "text": "\n\t\t\t\t\treg_pc[1:0] <= 0;\n"
+    }
+  ]
+}

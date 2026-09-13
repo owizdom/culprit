@@ -1,0 +1,6 @@
+{
+  "id": "h01",
+  "category": "two_hunk",
+  "title": "Tidy load/store width decode (native and compressed)",
+  "body": "Touches up the load width select in cpu_state_ldmem and the C.SWSP offset expansion in the compressed pre-decoder so both read like the neighbouring table entries."
+}

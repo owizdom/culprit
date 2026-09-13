@@ -1,0 +1,6 @@
+{
+  "id": "x05",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate current_pc and quotient_msk",
+  "body": "Adds short comments next to the current_pc and quotient_msk assignments so the cpu code is easier to follow. No functional change intended."
+}

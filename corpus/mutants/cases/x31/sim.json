@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": "Illegal Instruction at 0x0000519C",
+  "trap_cycle": 87325,
+  "seconds": 2.8,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "fail"
+}

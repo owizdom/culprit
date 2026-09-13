@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 972,
+      "changed": [
+        975
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1410,
+      "changed": [
+        1413
+      ]
+    }
+  ],
+  "bug_lines": [
+    975
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\t\t\t\t\t\t\t\tdecoded_rs1 <= 8 + mem_rdata_latched[9:7];",
+  "intended_contains": [
+    "alu_wait <= 0; // the alu_wait register"
+  ],
+  "mutation": {
+    "line": 975,
+    "base_line": 975,
+    "from": "+",
+    "to": "-",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1413,
+      "kind": "trailing_comment",
+      "text": "alu_wait <= 0; // the alu_wait register"
+    }
+  ]
+}

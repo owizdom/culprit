@@ -1,0 +1,27 @@
+{
+  "bug_contains": "latched_rd <= irqregs_offset + irq_state[1];",
+  "fix_line": "\t\t\t\t\t\tlatched_rd <= irqregs_offset + irq_state[0];",
+  "intended_contains": [
+    "latched_rd <= 3 + irq_state[0];",
+    "// q0 (return address) is written in irq_state 2'b01, q1 (pending IRQs) in 2'b10"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1540,
+      "changed": [
+        1543,
+        1545,
+        1547
+      ]
+    }
+  ],
+  "bug_lines": [
+    1545
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

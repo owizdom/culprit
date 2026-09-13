@@ -1,0 +1,6 @@
+{
+  "id": "x30",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate is_lbu_lhu_lw",
+  "body": "Adds a short comment next to the is_lbu_lhu_lw assignment so the decoder code is easier to follow. No functional change intended."
+}

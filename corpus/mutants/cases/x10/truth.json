@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1210,
+      "changed": [
+        1213
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1477,
+      "changed": [
+        1480
+      ]
+    }
+  ],
+  "bug_lines": [
+    1213
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "fix_line": "\tassign next_pc = latched_store && latched_branch ? reg_out & ~1 : reg_next_pc;",
+  "intended_contains": [
+    "latched_rd <= 2; // keep latched_rd in this state"
+  ],
+  "mutation": {
+    "line": 1213,
+    "base_line": 1213,
+    "from": "&",
+    "to": "|",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1480,
+      "kind": "trailing_comment",
+      "text": "latched_rd <= 2; // keep latched_rd in this state"
+    }
+  ]
+}

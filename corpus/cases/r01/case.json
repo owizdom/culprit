@@ -1,0 +1,6 @@
+{
+  "id": "r01",
+  "category": "non_rtl",
+  "title": "tests/sub: annotate borrow vectors",
+  "body": "Adds a comment on the small-operand borrow vector in sub.S and re-types its expected value in the same zero-padded style as the rest of the file."
+}

@@ -1,0 +1,1697 @@
+{
+  "seed": 20260913,
+  "total_candidates": 694,
+  "screened": 150,
+  "mutants": [
+    {
+      "base_line": 900,
+      "col": 75,
+      "from": "[0]",
+      "to": "[1]",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.2
+    },
+    {
+      "base_line": 548,
+      "col": 38,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.4
+    },
+    {
+      "base_line": 899,
+      "col": 98,
+      "from": "[6]",
+      "to": "[5]",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 32539,
+      "seconds": 1.0
+    },
+    {
+      "base_line": 1845,
+      "col": 11,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "lui"
+      ],
+      "trap_cycle": 12569,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 1088,
+      "col": 49,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 159437,
+      "seconds": 5.5
+    },
+    {
+      "base_line": 2259,
+      "col": 47,
+      "from": " & ",
+      "to": " | ",
+      "module": "picorv32_pcpi_mul",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.1
+    },
+    {
+      "base_line": 1234,
+      "col": 21,
+      "from": " < ",
+      "to": " >= ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.2
+    },
+    {
+      "base_line": 497,
+      "col": 35,
+      "from": "[12]",
+      "to": "[11]",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000ED4",
+      "trap_cycle": 193793,
+      "seconds": 7.0
+    },
+    {
+      "base_line": 1080,
+      "col": 53,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 472102,
+      "seconds": 18.1
+    },
+    {
+      "base_line": 940,
+      "col": 36,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO fc020038",
+      "trap_cycle": 8406,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1069,
+      "col": 64,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM fffffe00",
+      "trap_cycle": 8629,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 1068,
+      "col": 64,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8504,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 875,
+      "col": 57,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8226,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1060,
+      "col": 54,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8504,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1213,
+      "col": 59,
+      "from": " & ",
+      "to": " | ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM fffffffc",
+      "trap_cycle": 8480,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1049,
+      "col": 59,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8514,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 1095,
+      "col": 38,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8814,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 1058,
+      "col": 32,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 16788,
+      "seconds": 0.5
+    },
+    {
+      "base_line": 1867,
+      "col": 62,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 18.6
+    },
+    {
+      "base_line": 377,
+      "col": 21,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 25.5
+    },
+    {
+      "base_line": 975,
+      "col": 24,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000D42",
+      "trap_cycle": 153991,
+      "seconds": 6.3
+    },
+    {
+      "base_line": 1082,
+      "col": 75,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 482870,
+      "seconds": 17.7
+    },
+    {
+      "base_line": 468,
+      "col": 27,
+      "from": "[5]",
+      "to": "[4]",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO 00020030",
+      "trap_cycle": 158854,
+      "seconds": 6.3
+    },
+    {
+      "base_line": 1712,
+      "col": 61,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 20.8
+    },
+    {
+      "base_line": 1070,
+      "col": 32,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "srl"
+      ],
+      "trap_cycle": 76934,
+      "seconds": 3.0
+    },
+    {
+      "base_line": 1087,
+      "col": 20,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x0000519C",
+      "trap_cycle": 87308,
+      "seconds": 3.6
+    },
+    {
+      "base_line": 527,
+      "col": 28,
+      "from": "[12]",
+      "to": "[11]",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 20.3
+    },
+    {
+      "base_line": 1081,
+      "col": 75,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 482870,
+      "seconds": 20.9
+    },
+    {
+      "base_line": 1777,
+      "col": 40,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 20.4
+    },
+    {
+      "base_line": 503,
+      "col": 82,
+      "from": "[2]",
+      "to": "[1]",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 38.5
+    },
+    {
+      "base_line": 1086,
+      "col": 43,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.4
+    },
+    {
+      "base_line": 1506,
+      "col": 28,
+      "from": "[0]",
+      "to": "[1]",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": null,
+      "trap_cycle": 395822,
+      "seconds": 14.5
+    },
+    {
+      "base_line": 2506,
+      "col": 31,
+      "from": " >> ",
+      "to": " << ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": [
+        "div"
+      ],
+      "trap_cycle": 108483,
+      "seconds": 4.1
+    },
+    {
+      "base_line": 1084,
+      "col": 39,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.1
+    },
+    {
+      "base_line": 531,
+      "col": 37,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471644,
+      "seconds": 16.9
+    },
+    {
+      "base_line": 1338,
+      "col": 29,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 8484,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1678,
+      "col": 15,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 28.7
+    },
+    {
+      "base_line": 329,
+      "col": 59,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 23.6
+    },
+    {
+      "base_line": 491,
+      "col": 52,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x00000C36",
+      "trap_cycle": 114783,
+      "seconds": 4.1
+    },
+    {
+      "base_line": 2300,
+      "col": 18,
+      "from": "[6]",
+      "to": "[5]",
+      "module": "picorv32_pcpi_mul",
+      "status": "fail",
+      "failure": [
+        "mulh"
+      ],
+      "trap_cycle": 87027,
+      "seconds": 3.1
+    },
+    {
+      "base_line": 1040,
+      "col": 68,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8497,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1231,
+      "col": 37,
+      "from": " - ",
+      "to": " + ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.0
+    },
+    {
+      "base_line": 208,
+      "col": 16,
+      "from": " < ",
+      "to": " >= ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.6
+    },
+    {
+      "base_line": 1245,
+      "col": 62,
+      "from": "1'b0",
+      "to": "1'b1",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.3
+    },
+    {
+      "base_line": 1235,
+      "col": 21,
+      "from": " << ",
+      "to": " >> ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.8
+    },
+    {
+      "base_line": 1240,
+      "col": 36,
+      "from": " - ",
+      "to": " + ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "auipc"
+      ],
+      "trap_cycle": 36219,
+      "seconds": 1.1
+    },
+    {
+      "base_line": 1019,
+      "col": 64,
+      "from": " != ",
+      "to": " == ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0xTRAP",
+      "trap_cycle": 90012,
+      "seconds": 3.0
+    },
+    {
+      "base_line": 1922,
+      "col": 30,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8984,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 787,
+      "col": 13,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.1
+    },
+    {
+      "base_line": 1236,
+      "col": 32,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.0
+    },
+    {
+      "base_line": 1846,
+      "col": 49,
+      "from": " << ",
+      "to": " >> ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "slli"
+      ],
+      "trap_cycle": 38318,
+      "seconds": 1.2
+    },
+    {
+      "base_line": 1650,
+      "col": 35,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 27.8
+    },
+    {
+      "base_line": 574,
+      "col": 18,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxx",
+      "trap_cycle": 2,
+      "seconds": 0.1
+    },
+    {
+      "base_line": 912,
+      "col": 24,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 241000,
+      "seconds": 8.6
+    },
+    {
+      "base_line": 2227,
+      "col": 78,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32_pcpi_mul",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x0000519C",
+      "trap_cycle": 87325,
+      "seconds": 2.8
+    },
+    {
+      "base_line": 1673,
+      "col": 46,
+      "from": " & ",
+      "to": " | ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM fffffffc",
+      "trap_cycle": 8831,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1075,
+      "col": 64,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 173339,
+      "seconds": 6.4
+    },
+    {
+      "base_line": 1233,
+      "col": 30,
+      "from": " < ",
+      "to": " >= ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.9
+    },
+    {
+      "base_line": 486,
+      "col": 35,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0xFFFFF3",
+      "trap_cycle": 97273,
+      "seconds": 3.1
+    },
+    {
+      "base_line": 332,
+      "col": 8,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "mulh"
+      ],
+      "trap_cycle": 86937,
+      "seconds": 2.8
+    },
+    {
+      "base_line": 1930,
+      "col": 35,
+      "from": "[0]",
+      "to": "[1]",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 20121,
+      "seconds": 0.6
+    },
+    {
+      "base_line": 1325,
+      "col": 33,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 18.5
+    },
+    {
+      "base_line": 1101,
+      "col": 72,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM fffffffc",
+      "trap_cycle": 8412,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1093,
+      "col": 50,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Bus error in Instruction at 0x00004368",
+      "trap_cycle": 46481,
+      "seconds": 1.4
+    },
+    {
+      "base_line": 1895,
+      "col": 62,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.7
+    },
+    {
+      "base_line": 388,
+      "col": 17,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 57,
+      "seconds": 0.1
+    },
+    {
+      "base_line": 465,
+      "col": 34,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8408,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1795,
+      "col": 45,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.7
+    },
+    {
+      "base_line": 1400,
+      "col": 103,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.0
+    },
+    {
+      "base_line": 372,
+      "col": 54,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 25.5
+    },
+    {
+      "base_line": 2476,
+      "col": 53,
+      "from": "[31]",
+      "to": "[30]",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000ED4",
+      "trap_cycle": 280609,
+      "seconds": 9.9
+    },
+    {
+      "base_line": 474,
+      "col": 35,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471700,
+      "seconds": 16.5
+    },
+    {
+      "base_line": 2475,
+      "col": 39,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": [
+        "div"
+      ],
+      "trap_cycle": 108514,
+      "seconds": 3.8
+    },
+    {
+      "base_line": 1274,
+      "col": 13,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 158380,
+      "seconds": 5.7
+    },
+    {
+      "base_line": 1605,
+      "col": 42,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471644,
+      "seconds": 16.3
+    },
+    {
+      "base_line": 963,
+      "col": 36,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x00000C36",
+      "trap_cycle": 114783,
+      "seconds": 4.2
+    },
+    {
+      "base_line": 1048,
+      "col": 37,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "lb",
+        "lw",
+        "sb",
+        "sh",
+        "sw",
+        "srl",
+        "mulhsu"
+      ],
+      "trap_cycle": 237783,
+      "seconds": 8.2
+    },
+    {
+      "base_line": 1918,
+      "col": 13,
+      "from": " - ",
+      "to": " + ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 456061,
+      "seconds": 15.4
+    },
+    {
+      "base_line": 386,
+      "col": 42,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 285,
+      "seconds": 0.1
+    },
+    {
+      "base_line": 1097,
+      "col": 22,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8510,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1628,
+      "col": 12,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 466675,
+      "seconds": 15.7
+    },
+    {
+      "base_line": 1083,
+      "col": 102,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 26.8
+    },
+    {
+      "base_line": 2786,
+      "col": 34,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32_axi_adapter",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.9
+    },
+    {
+      "base_line": 1071,
+      "col": 54,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x00007E8C",
+      "trap_cycle": 72326,
+      "seconds": 2.3
+    },
+    {
+      "base_line": 1064,
+      "col": 86,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 35454,
+      "seconds": 1.1
+    },
+    {
+      "base_line": 2801,
+      "col": 16,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32_axi_adapter",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 17.9
+    },
+    {
+      "base_line": 1663,
+      "col": 30,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 18.4
+    },
+    {
+      "base_line": 328,
+      "col": 109,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.1
+    },
+    {
+      "base_line": 871,
+      "col": 56,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 25.7
+    },
+    {
+      "base_line": 1261,
+      "col": 41,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.6
+    },
+    {
+      "base_line": 1128,
+      "col": 40,
+      "from": "[31]",
+      "to": "[30]",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.5
+    },
+    {
+      "base_line": 1280,
+      "col": 31,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.5
+    },
+    {
+      "base_line": 913,
+      "col": 23,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO fffffff8",
+      "trap_cycle": 87515,
+      "seconds": 2.8
+    },
+    {
+      "base_line": 1848,
+      "col": 16,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "lui"
+      ],
+      "trap_cycle": 35962,
+      "seconds": 1.2
+    },
+    {
+      "base_line": 1074,
+      "col": 54,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0xTRAP",
+      "trap_cycle": 52688,
+      "seconds": 1.8
+    },
+    {
+      "base_line": 1277,
+      "col": 21,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "ori"
+      ],
+      "trap_cycle": 35168,
+      "seconds": 1.2
+    },
+    {
+      "base_line": 1055,
+      "col": 29,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 158266,
+      "seconds": 5.2
+    },
+    {
+      "base_line": 1885,
+      "col": 12,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 9357,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 576,
+      "col": 29,
+      "from": " & ",
+      "to": " | ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO 00020000",
+      "trap_cycle": 137205,
+      "seconds": 3.8
+    },
+    {
+      "base_line": 1073,
+      "col": 54,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x0000A3E4",
+      "trap_cycle": 74607,
+      "seconds": 2.4
+    },
+    {
+      "base_line": 1076,
+      "col": 86,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 55475,
+      "seconds": 1.8
+    },
+    {
+      "base_line": 1057,
+      "col": 32,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8504,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 917,
+      "col": 24,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO 00020000",
+      "trap_cycle": 8968,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1263,
+      "col": 44,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.6
+    },
+    {
+      "base_line": 1916,
+      "col": 38,
+      "from": " | ",
+      "to": " & ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 16.2
+    },
+    {
+      "base_line": 1796,
+      "col": 34,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.0
+    },
+    {
+      "base_line": 889,
+      "col": 85,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 8322,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1091,
+      "col": 72,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": null,
+      "trap_cycle": 395790,
+      "seconds": 13.0
+    },
+    {
+      "base_line": 886,
+      "col": 71,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": null,
+      "trap_cycle": 395790,
+      "seconds": 13.4
+    },
+    {
+      "base_line": 376,
+      "col": 117,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 17.4
+    },
+    {
+      "base_line": 1105,
+      "col": 22,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "xori"
+      ],
+      "trap_cycle": 58489,
+      "seconds": 2.4
+    },
+    {
+      "base_line": 1282,
+      "col": 17,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.9
+    },
+    {
+      "base_line": 363,
+      "col": 44,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8506,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 583,
+      "col": 24,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 16.3
+    },
+    {
+      "base_line": 2480,
+      "col": 19,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 146065,
+      "seconds": 5.0
+    },
+    {
+      "base_line": 1968,
+      "col": 15,
+      "from": "[0]",
+      "to": "[1]",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.4
+    },
+    {
+      "base_line": 1090,
+      "col": 100,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 25.9
+    },
+    {
+      "base_line": 1736,
+      "col": 13,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 15.8
+    },
+    {
+      "base_line": 2787,
+      "col": 34,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32_axi_adapter",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.3
+    },
+    {
+      "base_line": 1902,
+      "col": 12,
+      "from": "1'b1",
+      "to": "1'b0",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "lb"
+      ],
+      "trap_cycle": 43311,
+      "seconds": 1.4
+    },
+    {
+      "base_line": 679,
+      "col": 49,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8216,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 169,
+      "col": 35,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.8
+    },
+    {
+      "base_line": 1521,
+      "col": 77,
+      "from": " & ",
+      "to": " | ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 15.8
+    },
+    {
+      "base_line": 1328,
+      "col": 14,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 16827,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 489,
+      "col": 34,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000D42",
+      "trap_cycle": 186689,
+      "seconds": 6.0
+    },
+    {
+      "base_line": 2444,
+      "col": 59,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x00003708",
+      "trap_cycle": 108934,
+      "seconds": 3.5
+    },
+    {
+      "base_line": 866,
+      "col": 18,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8630,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 2502,
+      "col": 21,
+      "from": " >> ",
+      "to": " << ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": [
+        "div"
+      ],
+      "trap_cycle": 108514,
+      "seconds": 3.5
+    },
+    {
+      "base_line": 1059,
+      "col": 32,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 16788,
+      "seconds": 0.5
+    },
+    {
+      "base_line": 1619,
+      "col": 46,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.6
+    },
+    {
+      "base_line": 1050,
+      "col": 59,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 9342,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1838,
+      "col": 16,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": [
+        "slli"
+      ],
+      "trap_cycle": 62226,
+      "seconds": 1.9
+    },
+    {
+      "base_line": 1791,
+      "col": 19,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.7
+    },
+    {
+      "base_line": 2291,
+      "col": 38,
+      "from": " - ",
+      "to": " + ",
+      "module": "picorv32_pcpi_mul",
+      "status": "fail",
+      "failure": [
+        "mulh"
+      ],
+      "trap_cycle": 87027,
+      "seconds": 2.9
+    },
+    {
+      "base_line": 1077,
+      "col": 86,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "Illegal Instruction at 0x00001A14",
+      "trap_cycle": 84549,
+      "seconds": 3.0
+    },
+    {
+      "base_line": 1003,
+      "col": 38,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 66216,
+      "seconds": 2.7
+    },
+    {
+      "base_line": 1014,
+      "col": 96,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM 0002a0b8",
+      "trap_cycle": 87407,
+      "seconds": 3.3
+    },
+    {
+      "base_line": 601,
+      "col": 24,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 29.2
+    },
+    {
+      "base_line": 2474,
+      "col": 39,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32_pcpi_div",
+      "status": "fail",
+      "failure": [
+        "div"
+      ],
+      "trap_cycle": 108514,
+      "seconds": 4.4
+    },
+    {
+      "base_line": 1359,
+      "col": 26,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 17.5
+    },
+    {
+      "base_line": 955,
+      "col": 25,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000D42",
+      "trap_cycle": 267600,
+      "seconds": 10.3
+    },
+    {
+      "base_line": 1037,
+      "col": 21,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY WRITE TO xxxxxxxX",
+      "trap_cycle": 8222,
+      "seconds": 0.3
+    },
+    {
+      "base_line": 1276,
+      "col": 12,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000D42",
+      "trap_cycle": 241899,
+      "seconds": 8.6
+    },
+    {
+      "base_line": 1008,
+      "col": 33,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": null,
+      "trap_cycle": 8491,
+      "seconds": 0.2
+    },
+    {
+      "base_line": 1548,
+      "col": 38,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 462670,
+      "seconds": 16.1
+    },
+    {
+      "base_line": 908,
+      "col": 23,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.3
+    },
+    {
+      "base_line": 1925,
+      "col": 18,
+      "from": " && ",
+      "to": " || ",
+      "module": "picorv32",
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 16.2
+    },
+    {
+      "base_line": 1540,
+      "col": 15,
+      "from": " == ",
+      "to": " != ",
+      "module": "picorv32",
+      "status": "timeout",
+      "failure": null,
+      "trap_cycle": 999900,
+      "seconds": 22.8
+    },
+    {
+      "base_line": 384,
+      "col": 47,
+      "from": " || ",
+      "to": " && ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM 00020000",
+      "trap_cycle": 196610,
+      "seconds": 5.1
+    },
+    {
+      "base_line": 166,
+      "col": 64,
+      "from": " + ",
+      "to": " - ",
+      "module": "picorv32",
+      "status": "fail",
+      "failure": "OUT-OF-BOUNDS MEMORY READ FROM xxxxxxxX",
+      "trap_cycle": 8502,
+      "seconds": 0.2
+    }
+  ]
+}

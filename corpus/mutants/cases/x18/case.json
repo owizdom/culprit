@@ -1,0 +1,6 @@
+{
+  "id": "x18",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate latched_store, re-indent reg_next_pc",
+  "body": "Small readability pass while reading the cpu code: a short comment next to the latched_store assignment and the reg_next_pc assignment re-indented. No functional change intended."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "x35",
+  "category": "mutant_with_decoys",
+  "title": "mul: annotate rs2",
+  "body": "Adds a short comment next to the rs2 assignment so the mul code is easier to follow. No functional change intended."
+}

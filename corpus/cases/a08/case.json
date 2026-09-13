@@ -1,0 +1,6 @@
+{
+  "id": "a08",
+  "category": "bug_in_intended_edit",
+  "title": "decoder: give ALU immediates their own decoded_imm item",
+  "body": "Splits is_alu_reg_imm out of the shared I-type immediate item so the ALU immediate path can be special-cased for shift amounts in a follow-up. jalr and loads keep the existing item."
+}

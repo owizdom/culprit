@@ -1,0 +1,32 @@
+{
+  "bug_contains": "reg_op1 <= reg_op1 >>> 8;",
+  "fix_line": "\t\t\t\t\t\tinstr_srai || instr_sra: reg_op1 <= $signed(reg_op1) >>> 8;",
+  "intended_contains": [
+    "TWO_STAGE_SHIFT && reg_sh >= 8",
+    "reg_sh <= reg_sh - 8;"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1832,
+      "changed": [
+        1835,
+        1836,
+        1837,
+        1838,
+        1839,
+        1840,
+        1841,
+        1842
+      ]
+    }
+  ],
+  "bug_lines": [
+    1840
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

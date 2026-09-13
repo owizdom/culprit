@@ -1,0 +1,6 @@
+{
+  "id": "x27",
+  "category": "mutant_with_decoys",
+  "title": "decoder: annotate instr_andi and cpu_state",
+  "body": "Adds short comments next to the instr_andi and cpu_state assignments so the decoder code is easier to follow. No functional change intended."
+}

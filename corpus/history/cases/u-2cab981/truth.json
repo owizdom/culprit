@@ -1,0 +1,31 @@
+{
+  "category": "upstream_bug",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 2473,
+      "changed": [
+        2476
+      ]
+    }
+  ],
+  "bug_lines": [
+    2476
+  ],
+  "bug_hunks": [
+    1
+  ],
+  "bug_is_missing_code": false,
+  "intended_contains": [],
+  "upstream_fix": [
+    {
+      "path": "picorv32.v",
+      "start": 2473,
+      "end": 2479,
+      "bug_text": "\t\t\trunning <= 1;\n\t\t\tdividend <= (instr_div || instr_rem) && pcpi_rs1[31] ? -pcpi_rs1 : pcpi_rs1;\n\t\t\tdivisor <= ((instr_div || instr_rem) && pcpi_rs2[31] ? -pcpi_rs2 : pcpi_rs2) << 31;\n\t\t\toutsign <= (instr_div && (pcpi_rs1[31] != pcpi_rs2[31])) || (instr_rem && pcpi_rs1[31]);\n\t\t\tquotient <= 0;\n\t\t\tquotient_msk <= 1 << 31;\n\t\tend else\n",
+      "replacement": "\t\t\trunning <= 1;\n\t\t\tdividend <= (instr_div || instr_rem) && pcpi_rs1[31] ? -pcpi_rs1 : pcpi_rs1;\n\t\t\tdivisor <= ((instr_div || instr_rem) && pcpi_rs2[31] ? -pcpi_rs2 : pcpi_rs2) << 31;\n\t\t\toutsign <= (instr_div && (pcpi_rs1[31] != pcpi_rs2[31]) && |pcpi_rs2) || (instr_rem && pcpi_rs1[31]);\n\t\t\tquotient <= 0;\n\t\t\tquotient_msk <= 1 << 31;\n\t\tend else\n"
+    }
+  ],
+  "commit": "2cab981862b0ff4b362363de865151955ebedf01"
+}

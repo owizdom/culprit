@@ -1,0 +1,45 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1272,
+      "changed": [
+        1275
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1842,
+      "changed": [
+        1845
+      ]
+    }
+  ],
+  "bug_lines": [
+    1845
+  ],
+  "bug_hunks": [
+    2
+  ],
+  "fix_line": "\t\t\t\t\tcase (1'b1)",
+  "intended_contains": [
+    "alu_out = reg_op1 ^ reg_op2; // alu_out for the instruction in this cycle"
+  ],
+  "mutation": {
+    "line": 1845,
+    "base_line": 1845,
+    "from": "1'b1",
+    "to": "1'b0",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 1275,
+      "kind": "trailing_comment",
+      "text": "alu_out = reg_op1 ^ reg_op2; // alu_out for the instruction in this cycle"
+    }
+  ]
+}

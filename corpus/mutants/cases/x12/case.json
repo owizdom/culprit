@@ -1,0 +1,6 @@
+{
+  "id": "x12",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate dbg_rs1val_valid and current_pc",
+  "body": "Adds short comments next to the dbg_rs1val_valid and current_pc assignments so the cpu code is easier to follow. No functional change intended."
+}

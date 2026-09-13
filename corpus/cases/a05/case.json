@@ -1,0 +1,6 @@
+{
+  "id": "a05",
+  "category": "bug_in_intended_edit",
+  "title": "pcpi_mul: document operand signedness per opcode",
+  "body": "Adds the MUL/MULH/MULHSU/MULHU signedness table above the decode wires and drops the single-element reduction-OR on instr_rs2_signed. No logic change."
+}

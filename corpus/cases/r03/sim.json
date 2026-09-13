@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "mulhu"
+  ],
+  "trap_cycle": 98976,
+  "seconds": 0.0,
+  "kept": true
+}

@@ -1,0 +1,6 @@
+{
+  "id": "a06",
+  "category": "bug_in_intended_edit",
+  "title": "pcpi_div: normalise operand sign handling on start",
+  "body": "Puts the sign bit first in the dividend/divisor negation conditions and replaces the reduction-OR divide-by-zero test with an explicit compare. Lint was flagging |pcpi_rs2 in a boolean context."
+}

@@ -1,0 +1,26 @@
+{
+  "bug_contains": "decoded_imm <= $signed(mem_rdata_q[31:21]);",
+  "fix_line": "\t\t\t\t\tdecoded_imm <= $signed(mem_rdata_q[31:20]);",
+  "intended_contains": [
+    "|{instr_jalr, is_lb_lh_lw_lbu_lhu}:"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1122,
+      "changed": [
+        1125,
+        1127,
+        1128
+      ]
+    }
+  ],
+  "bug_lines": [
+    1128
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

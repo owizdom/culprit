@@ -1,0 +1,44 @@
+{
+  "bug_contains": "instr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b011;",
+  "fix_line": "\t\t\tinstr_bgeu  <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b111;",
+  "intended_contains": [
+    "// funct3 values follow the RV32I base opcode map",
+    "rvfi_mode <= 3; // machine mode"
+  ],
+  "category": "multi_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 642,
+      "changed": [
+        645,
+        646,
+        647
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1045,
+      "changed": [
+        1048
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1994,
+      "changed": [
+        1997,
+        1998
+      ]
+    }
+  ],
+  "bug_lines": [
+    1048
+  ],
+  "bug_hunks": [
+    2
+  ]
+}

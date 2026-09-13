@@ -1,0 +1,42 @@
+[project]
+name = "culprit"
+version = "0.1.0"
+description = "A debugging agent for chip teams: finds the line that broke the regression, proves it in simulation, fixes it, and tells GitHub, Linear and Slack."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic",
+    "httpx",
+    "slack-sdk",
+    "pyyaml",
+    "pywebview",
+]
+
+[project.scripts]
+culprit = "culprit:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app", "apps", "localize", "repair", "runs", "sim", "surface"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"culprit.py" = "culprit.py"
+"paths.py" = "paths.py"
+"design.py" = "design.py"
+"config.yaml" = "config.yaml"
+"web/dist" = "web/dist"
+"corpus/cases.yaml" = "corpus/cases.yaml"
+"corpus/sweep.json" = "corpus/sweep.json"
+"brand/png/icon-1024.png" = "brand/png/icon-1024.png"
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

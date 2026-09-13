@@ -1,0 +1,25 @@
+github:
+  repo: owizdom/picorv32-ci       # the demo design; the app's repository picker writes your own to config.local.yaml
+  client_id: Ov23li4FkllcKzLISvkF   # public id of the CULPRIT OAuth App, for Sign in with GitHub (device flow)
+slack:
+  channel: ""                     # set in the app (Slack step); stored in config.local.yaml
+linear:
+  team_id: ""                     # set in the app (Linear step)
+  done_state_id: ""
+  users: {}                       # GitHub login -> Linear user id, filled in by the Linear step
+
+# design: which chip CULPRIT investigates. Absent = PicoRV32 (defaults in design.py); uncomment and edit to point CULPRIT at another design with a self-checking Icarus testbench.
+# design:
+#   name: Blinky
+#   description: an LED blinker written in Verilog
+#   rtl_file: rtl/blinky.v                  # the one RTL file CULPRIT localizes in, elaborates and repairs
+#   sources: [tb/tb.v, rtl/blinky.v]        # iverilog compile order
+#   sim: {top: tb, defines: [], timeout_s: 600}
+#   firmware: null                          # no firmware image: no hex, no plusarg, no Docker
+#   log: {end: null, pass: '^BLINKY OK$', timeout: TIMEOUT, test_line: null, named_tests: [], reason: null, end_time: '\$finish called at (\d+) \(1ps\)'}
+#   timing: {reset_cycles: 10, period_ns: 10}
+#   yosys: {top: blinky, chparams: {COMPRESSED_ISA: null, ENABLE_MUL: null, ENABLE_DIV: null, ENABLE_IRQ: null, ENABLE_TRACE: null}}
+#   hierarchy: {sim_core: tb.dut, netlist_prefix: ""}
+#   observed_ports: [led, counter]
+#   memories: {cpuregs: null}               # null removes a default entry
+#   corpus_features: false                  # Test Run and the mutant kill rate use the PicoRV32 corpus

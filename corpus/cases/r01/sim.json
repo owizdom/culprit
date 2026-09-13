@@ -1,0 +1,9 @@
+{
+  "head_status": "fail",
+  "failure": [
+    "sub"
+  ],
+  "trap_cycle": 66678,
+  "seconds": 0.0,
+  "kept": true
+}

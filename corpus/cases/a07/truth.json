@@ -1,0 +1,31 @@
+{
+  "bug_contains": "pcpi_int_wait  || (ENABLE_DIV && pcpi_div_ready);",
+  "fix_line": "\t\tpcpi_int_wait  = pcpi_int_wait  || (ENABLE_DIV && pcpi_div_wait);",
+  "intended_contains": [
+    "pcpi_int_ready = pcpi_int_ready || (ENABLE_DIV && pcpi_div_ready);",
+    "pcpi_int_wait  = pcpi_int_wait  || ((ENABLE_MUL || ENABLE_FAST_MUL) && pcpi_mul_wait);"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 325,
+      "changed": [
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334
+      ]
+    }
+  ],
+  "bug_lines": [
+    331
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

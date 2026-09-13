@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 860,
+      "changed": [
+        863
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1038,
+      "changed": [
+        1041
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1659,
+      "changed": [
+        1662
+      ]
+    }
+  ],
+  "bug_lines": [
+    1041
+  ],
+  "bug_hunks": [
+    2
+  ],
+  "fix_line": "\t\t\tinstr_beq   <= is_beq_bne_blt_bge_bltu_bgeu && mem_rdata_q[14:12] == 3'b000;",
+  "intended_contains": [
+    "// keep is_lbu_lhu_lw in this state",
+    "dbg_rs1val <= cpuregs_rs1; // keep dbg_rs1val in this state"
+  ],
+  "mutation": {
+    "line": 1041,
+    "base_line": 1040,
+    "from": "==",
+    "to": "!=",
+    "module": "picorv32"
+  },
+  "decoys": [
+    {
+      "base_line": 863,
+      "kind": "comment_above",
+      "text": "// keep is_lbu_lhu_lw in this state"
+    },
+    {
+      "base_line": 1661,
+      "kind": "trailing_comment",
+      "text": "dbg_rs1val <= cpuregs_rs1; // keep dbg_rs1val in this state"
+    }
+  ]
+}

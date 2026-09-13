@@ -1,0 +1,458 @@
+[
+  {
+    "sha": "de92ce54e8a3f24f2adc6b5d04de35e4edb873e5",
+    "date": "2023-08-20",
+    "subject": "Fix RV32E shifts",
+    "sha7": "de92ce5",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 24.4
+    }
+  },
+  {
+    "sha": "29102c00a82ffd08f1e0b3c9cbac1c95c17f573b",
+    "date": "2023-02-20",
+    "subject": "Bugfix: decode fence instruction",
+    "sha7": "29102c0",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 25.7
+    }
+  },
+  {
+    "sha": "100e421be0aa5fb130b6e4f532d15fc7d1a03f02",
+    "date": "2021-12-02",
+    "subject": "Fix copyright info",
+    "sha7": "100e421",
+    "stage": "not_a_bug_fix",
+    "reason": "license header only (author name in a block comment)"
+  },
+  {
+    "sha": "fac01cee1c03f2209078b3e268987814309dc63d",
+    "date": "2020-03-30",
+    "subject": "- fix missing brackets",
+    "sha7": "fac01ce",
+    "stage": "compile_error",
+    "prescreen": {
+      "status": "compile_error",
+      "failure": null,
+      "trap_cycle": null,
+      "seconds": 0.1
+    }
+  },
+  {
+    "sha": "258d63d4762a86385f69c7699b485c0c5559c763",
+    "date": "2020-03-27",
+    "subject": "- fix missed timer interrupts,   when another interrupt activates shortly before",
+    "sha7": "258d63d",
+    "stage": "does_not_apply",
+    "reason": "hunk 2/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "e6779ba52b41c3e6551ae95a137c543abc91a4f6",
+    "date": "2019-08-06",
+    "subject": "Disable verilator warnings, fixes #128",
+    "sha7": "e6779ba",
+    "stage": "cosmetic",
+    "reason": "only whitespace/comments change"
+  },
+  {
+    "sha": "d046cbfa4986acb50ef6b6e5ff58e9cab543980b",
+    "date": "2019-06-30",
+    "subject": "Add PICORV32_TESTBUG_nnn ifdefs for testing purposes",
+    "sha7": "d046cbf",
+    "stage": "not_a_bug_fix",
+    "reason": "adds PICORV32_TESTBUG_nnn ifdefs; the compiled `else branches equal today's lines"
+  },
+  {
+    "sha": "7b6aa21f344c0482cb3f88b44bb47230bbf23882",
+    "date": "2017-10-06",
+    "subject": "Fix bug in picorv32_pcpi_div, Add RISCV_FORMAL_ALTOPS support",
+    "sha7": "7b6aa21",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/3: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "13f93b70009fac1131205477064c36ae54dff1f6",
+    "date": "2017-09-13",
+    "subject": "Revert \"Fix RISCV_FORMAL_BLACKBOX_REGS (broke liveness on branch ops)\"",
+    "sha7": "13f93b7",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "624bc05f989e3fdb3ca499d71a1705d0aac569c5",
+    "date": "2017-09-12",
+    "subject": "Fix RISCV_FORMAL_BLACKBOX_REGS (broke liveness on branch ops)",
+    "sha7": "624bc05",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "bb9ebeb9e37bc6103f527b434a13d9b4889a796b",
+    "date": "2017-05-18",
+    "subject": "Fixed jalr, c_jalr, and c_jr insns (bug discovered by riscv-formal)",
+    "sha7": "bb9ebeb",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 25.3
+    }
+  },
+  {
+    "sha": "436544ccab9dcef61d074feda19e52c94fdb5c1b",
+    "date": "2017-05-13",
+    "subject": "Fix decoding of C.ADDI instruction",
+    "sha7": "436544c",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 25.3
+    }
+  },
+  {
+    "sha": "bf9687028df7570e7524a8a7b43f9c180c6dd1c7",
+    "date": "2017-05-07",
+    "subject": "Fix decoding of illegal/reserved opcodes as other valid opcodes",
+    "sha7": "bf96870",
+    "stage": "does_not_apply",
+    "reason": "hunk 2/4: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "3495604877d8e0cabd9c583a9dc7805803b3c83c",
+    "date": "2017-03-14",
+    "subject": "Fix indenting in wishbone code",
+    "sha7": "3495604",
+    "stage": "not_a_bug_fix",
+    "reason": "re-indents picorv32_wb; subject says indenting"
+  },
+  {
+    "sha": "f33ddd3654faf1571ef765d898040f24cf092355",
+    "date": "2017-02-27",
+    "subject": "Fix in rvfi_mem_ handling (when compressed isa is enabled)",
+    "sha7": "f33ddd3",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "aaa9e25756c1765353e6ff42da82cbedeecf62cd",
+    "date": "2017-02-26",
+    "subject": "Add DEBUGNETS debug flag",
+    "sha7": "aaa9e25",
+    "stage": "not_a_bug_fix",
+    "reason": "adds the DEBUGNETS debug flag (matched 'bug' inside 'debug')"
+  },
+  {
+    "sha": "c7cc32ed95644b50a1cd22e2005cacdba5b63388",
+    "date": "2017-02-17",
+    "subject": "Fix verilog code for modelsim",
+    "sha7": "c7cc32e",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "e4312b0fab053cda38cb46623341db85e9f8a060",
+    "date": "2017-02-11",
+    "subject": "Fix \"mem_xfer is used before its declaration\" warning",
+    "sha7": "e4312b0",
+    "stage": "not_a_bug_fix",
+    "reason": "moves a wire declaration to silence a use-before-declaration warning"
+  },
+  {
+    "sha": "f975ce1e454077c58ecb750da3abb77dcdf74df7",
+    "date": "2017-01-15",
+    "subject": "Fix picorv32_axi STACKADDR default value",
+    "sha7": "f975ce1",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 25.6
+    }
+  },
+  {
+    "sha": "ef86b30b2598df6993a473222ebe355b0348e226",
+    "date": "2016-12-15",
+    "subject": "Fixed some linter warnings in picorv32.v",
+    "sha7": "ef86b30",
+    "stage": "not_a_bug_fix",
+    "reason": "linter width padding ({16'b0, x}, 32'bx); same values after Verilog zero-extension"
+  },
+  {
+    "sha": "54a8e4b311e207fa1d07226627dbf9dea6c13836",
+    "date": "2016-11-29",
+    "subject": "Fixed catching jumps to misaligned insn",
+    "sha7": "54a8e4b",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 24.9
+    }
+  },
+  {
+    "sha": "7fc2cbd72a63228e85a002aac80104febf8b41ba",
+    "date": "2016-11-27",
+    "subject": "More RVFI bugfixes",
+    "sha7": "7fc2cbd",
+    "stage": "does_not_apply",
+    "reason": "hunk 4/4: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "fd38f876e1371501d0bd093b9351629d29bacaa5",
+    "date": "2016-11-24",
+    "subject": "Minor RVFI bugfix",
+    "sha7": "fd38f87",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "f82af97595c3d8c594927a735e401b3c62d46be2",
+    "date": "2016-11-18",
+    "subject": "Another bugfix regarding compressed ISA and unaligned insns",
+    "sha7": "f82af97",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 19.2
+    }
+  },
+  {
+    "sha": "4101cfe8105c0442be88a938ca10b73ee08037b7",
+    "date": "2016-09-16",
+    "subject": "Fixed the nontrivial compressed ISA bug found by tracecmp2",
+    "sha7": "4101cfe",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/4: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "c209c016b35a085ccc6044dead7e0b8461b239ca",
+    "date": "2016-09-13",
+    "subject": "More fixes related to assertpmux checks",
+    "sha7": "c209c01",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 19.4
+    }
+  },
+  {
+    "sha": "38a760daf8e19c882afbeb9952c36cb8cb41bd5e",
+    "date": "2016-09-07",
+    "subject": "Fix tabs",
+    "sha7": "38a760d",
+    "stage": "cosmetic",
+    "reason": "only whitespace/comments change"
+  },
+  {
+    "sha": "da3749819197875c10eeec54551401ac19090902",
+    "date": "2016-09-06",
+    "subject": "Two minor bugfixes",
+    "sha7": "da37498",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "d5b7e9e1756aa5afa1d7dd4eb2e069a7600f64e9",
+    "date": "2016-09-03",
+    "subject": "Minor bugfix/cleanup (mostly for formal verification)",
+    "sha7": "d5b7e9e",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "bfba9b3eb34bfd9cc5d516153ddc960a44f7c5f2",
+    "date": "2016-08-30",
+    "subject": "Bugfix in picorv32_pcpi_fast_mul",
+    "sha7": "bfba9b3",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "cefe09b8d41285d3ece4ab0efcfe6aea1a259cd8",
+    "date": "2016-08-30",
+    "subject": "Minor fixes/cleanups in mul reset logic",
+    "sha7": "cefe09b",
+    "stage": "does_not_apply",
+    "reason": "hunk 2/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "288a043acaa1db7cfda52c672afed32aa3ff4b0e",
+    "date": "2016-06-09",
+    "subject": "Fixed use-before-declaration problem with VCS",
+    "sha7": "288a043",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "38d51a33839f1c7407e42bb51a6104a8bad88aec",
+    "date": "2016-05-31",
+    "subject": "Deassert pcpi_valid upon asserting sbreak IRQ",
+    "sha7": "38d51a3",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "fb3178c4b7d5244050b4438ec617f19d53024627",
+    "date": "2016-04-13",
+    "subject": "Fixed dbg_ signals: no latches (formal verification doesn't like latches)",
+    "sha7": "fb3178c",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "436f16295130b063609c6e4df69a4657841efdf7",
+    "date": "2016-04-13",
+    "subject": "Minor change in DEBUGASM output",
+    "sha7": "436f162",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "262a9085bb730df84866f48934cf76ebbc19311e",
+    "date": "2016-04-13",
+    "subject": "Streamlined debug signals",
+    "sha7": "262a908",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/9: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "2c76f7d61b4ca1a55d9c129336ba9f34cd4efeeb",
+    "date": "2016-04-12",
+    "subject": "Added (by default disabled) register file access wires for debugging",
+    "sha7": "2c76f7d",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "789a411eadaedbc44417ae595f3410e65f89cfc3",
+    "date": "2016-04-12",
+    "subject": "Bugfix for CATCH_ILLINSN <-> WITH_PCPI interaction",
+    "sha7": "789a411",
+    "stage": "passes",
+    "prescreen": {
+      "status": "pass",
+      "failure": "EBREAK instruction at 0x0000072A",
+      "trap_cycle": 471610,
+      "seconds": 19.2
+    }
+  },
+  {
+    "sha": "2cab981862b0ff4b362363de865151955ebedf01",
+    "date": "2016-04-10",
+    "subject": "Fixed signed division by zero handling",
+    "sha7": "2cab981",
+    "stage": "kept",
+    "prescreen": {
+      "status": "fail",
+      "failure": [
+        "div"
+      ],
+      "trap_cycle": 110369,
+      "seconds": 5.1
+    }
+  },
+  {
+    "sha": "fce9656604316712df0b0ab87f6cd0ba708aa68c",
+    "date": "2016-04-10",
+    "subject": "Bugfix in memory interface (related to compressed ISA)",
+    "sha7": "fce9656",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "aa17d587843a78e3d49b5e24bc5e4ab76e8c6383",
+    "date": "2016-04-09",
+    "subject": "Bugfix in C.SRAI implementation",
+    "sha7": "aa17d58",
+    "stage": "kept",
+    "prescreen": {
+      "status": "fail",
+      "failure": "EBREAK instruction at 0x00000D42",
+      "trap_cycle": 267175,
+      "seconds": 11.3
+    }
+  },
+  {
+    "sha": "ef8014eebd35552aa8dde4bfddf9d7e27b5d1645",
+    "date": "2016-04-09",
+    "subject": "Bugfix in C.ADDI4SPN implementation",
+    "sha7": "ef8014e",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/2: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "16f97a86a1e8c4a7582e55a6c7e4d4430b076fe5",
+    "date": "2015-08-13",
+    "subject": "Reset bugfix (bug found via scripts/smt2-bmc/mem_equiv.*)",
+    "sha7": "16f97a8",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "9c028fc965e8913d82df2fde951102d8a12ff474",
+    "date": "2015-07-02",
+    "subject": "Added missing LD_RS1 debug statements",
+    "sha7": "9c028fc",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/3: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "853ce91300977b2afd0bc8e6b107ad1be1e25571",
+    "date": "2015-07-02",
+    "subject": "Added `debug macro",
+    "sha7": "853ce91",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/17: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  },
+  {
+    "sha": "b076d72806fb84ee0557a75f871aef0ba0d6a66b",
+    "date": "2015-06-28",
+    "subject": "Fixed PCPI instr prefetching",
+    "sha7": "b076d72",
+    "stage": "does_not_apply",
+    "reason": "hunk 1/1: post-fix text occurs 0 times in today's picorv32.v",
+    "applies_ignoring_whitespace": false
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "u-2cab981",
+  "category": "upstream_bug",
+  "title": "div: simplify the output sign expression",
+  "body": "Small cleanup in the division co-processor. No functional change intended.",
+  "commit": "2cab981862b0ff4b362363de865151955ebedf01",
+  "url": "https://github.com/YosysHQ/picorv32/commit/2cab981862b0ff4b362363de865151955ebedf01"
+}

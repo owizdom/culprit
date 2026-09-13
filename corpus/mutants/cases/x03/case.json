@@ -1,0 +1,6 @@
+{
+  "id": "x03",
+  "category": "mutant_with_decoys",
+  "title": "cpu: annotate alu_out_0, re-indent reg_pc",
+  "body": "Small readability pass while reading the cpu code: a short comment next to the alu_out_0 assignment and the reg_pc assignment re-indented. No functional change intended."
+}

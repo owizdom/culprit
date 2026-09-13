@@ -1,0 +1,7 @@
+{
+  "head_status": "fail",
+  "failure": "Illegal Instruction at 0x000010EA",
+  "trap_cycle": 457496,
+  "seconds": 0.0,
+  "kept": true
+}

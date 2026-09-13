@@ -1,0 +1,6 @@
+{
+  "id": "r04",
+  "category": "non_rtl",
+  "title": "testbench: write the pass magic in hex",
+  "body": "The firmware pass token is easier to spot in waveform viewers as hex, so compare against the hex form in the AXI memory model."
+}

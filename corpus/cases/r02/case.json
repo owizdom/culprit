@@ -1,0 +1,6 @@
+{
+  "id": "r02",
+  "category": "non_rtl",
+  "title": "tests/srai: use a shift-by-13 corner",
+  "body": "Vector 5 now checks the sign fill one bit further in, which is where the two-stage shifter switches from 4-bit to 1-bit steps."
+}

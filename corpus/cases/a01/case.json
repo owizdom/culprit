@@ -1,0 +1,6 @@
+{
+  "id": "a01",
+  "category": "bug_in_intended_edit",
+  "title": "ALU: group the single-cycle comparators",
+  "body": "Readability pass on the non-TWO_CYCLE_ALU block: arithmetic and shifts first, then the three comparators under one comment, with the signed/unsigned intent spelled out. No functional change intended."
+}

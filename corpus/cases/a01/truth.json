@@ -1,0 +1,29 @@
+{
+  "bug_contains": "alu_lts = $signed(reg_op1) < reg_op2;",
+  "fix_line": "\t\t\talu_lts = $signed(reg_op1) < $signed(reg_op2);",
+  "intended_contains": [
+    "alu_ltu = $unsigned(reg_op1) < $unsigned(reg_op2);",
+    "// comparators: equality, signed less-than, unsigned less-than"
+  ],
+  "category": "bug_in_intended_edit",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1238,
+      "changed": [
+        1243,
+        1244,
+        1245,
+        1246,
+        1247
+      ]
+    }
+  ],
+  "bug_lines": [
+    1246
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

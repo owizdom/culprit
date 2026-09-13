@@ -1,0 +1,6 @@
+{
+  "id": "m07",
+  "category": "multi_hunk",
+  "title": "decoder: annotate immediate formats; rename pcpi timeout counter",
+  "body": "Adds bit-layout comments to the immediate decode and renames pcpi_timeout_counter to pcpi_timeout_cnt to match the other short counter names."
+}

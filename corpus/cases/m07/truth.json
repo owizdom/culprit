@@ -1,0 +1,45 @@
+{
+  "bug_contains": "mem_rdata_q[12:8]",
+  "fix_line": "\t\t\t\t\tdecoded_imm <= $signed({mem_rdata_q[31:25], mem_rdata_q[11:7]});",
+  "intended_contains": [
+    "pcpi_timeout_cnt",
+    "// S-type: imm[11:5] = insn[31:25]"
+  ],
+  "category": "multi_hunk",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1127,
+      "changed": [
+        1130,
+        1131
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1213,
+      "changed": [
+        1216
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 1423,
+      "changed": [
+        1426,
+        1427,
+        1429,
+        1430
+      ]
+    }
+  ],
+  "bug_lines": [
+    1131
+  ],
+  "bug_hunks": [
+    1
+  ]
+}

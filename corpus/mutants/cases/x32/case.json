@@ -1,0 +1,6 @@
+{
+  "id": "x32",
+  "category": "mutant_with_decoys",
+  "title": "div: annotate instr_divu",
+  "body": "Adds a short comment next to the instr_divu assignment so the div code is easier to follow. No functional change intended."
+}

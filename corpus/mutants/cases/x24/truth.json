@@ -1,0 +1,59 @@
+{
+  "category": "mutant_with_decoys",
+  "hunks": [
+    {
+      "id": 1,
+      "path": "picorv32.v",
+      "new_start": 1228,
+      "changed": [
+        1231
+      ]
+    },
+    {
+      "id": 2,
+      "path": "picorv32.v",
+      "new_start": 1672,
+      "changed": [
+        1675
+      ]
+    },
+    {
+      "id": 3,
+      "path": "picorv32.v",
+      "new_start": 2297,
+      "changed": [
+        2300
+      ]
+    }
+  ],
+  "bug_lines": [
+    2300
+  ],
+  "bug_hunks": [
+    3
+  ],
+  "fix_line": "\t\t\tif (mul_counter[6]) begin",
+  "intended_contains": [
+    "\n\t\t\t\talu_add_sub <= instr_sub ? reg_op1 - reg_op2 : reg_op1 + reg_op2;\n",
+    "dbg_rs1val_valid <= 1; // dbg_rs1val_valid in this cycle"
+  ],
+  "mutation": {
+    "line": 2300,
+    "base_line": 2300,
+    "from": "[6]",
+    "to": "[5]",
+    "module": "picorv32_pcpi_mul"
+  },
+  "decoys": [
+    {
+      "base_line": 1231,
+      "kind": "reindent",
+      "text": "\n\t\t\t\talu_add_sub <= instr_sub ? reg_op1 - reg_op2 : reg_op1 + reg_op2;\n"
+    },
+    {
+      "base_line": 1675,
+      "kind": "trailing_comment",
+      "text": "dbg_rs1val_valid <= 1; // dbg_rs1val_valid in this cycle"
+    }
+  ]
+}

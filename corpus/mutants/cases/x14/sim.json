@@ -1,0 +1,9 @@
+{
+  "head_status": "timeout",
+  "failure": null,
+  "trap_cycle": 999900,
+  "seconds": 19.4,
+  "kept": true,
+  "decoy_only_status": "pass",
+  "mutant_only_status": "timeout"
+}
