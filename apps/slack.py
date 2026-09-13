@@ -46,18 +46,49 @@ def _messages(fetch, attempts=6):
     raise Unanswered("Slack returned no messages for a conversation that has some; nothing was posted")
 
 
-def _find(key, thread_ts=None):
+def _posted(key):
+    """The ts of the message this install posted for key in the configured channel, or None; every post is in the ledger."""
+    ts = None
+    try:
+        lines = http.LEDGER.read_text().splitlines()
+    except FileNotFoundError:
+        return None
+    for line in lines:
+        try:
+            e = json.loads(line)
+        except ValueError:
+            continue
+        if (e.get("app"), e.get("op"), e.get("target"), e.get("key")) == ("slack", "chat.postMessage", channel(), key):
+            ts = e.get("id")
+    return ts
+
+
+def _find(key, thread_ts=None, trust_ledger=True):
+    """CULPRIT's message for key. Slack sometimes answers ok with an empty page, and waiting that out held posts and
+    resolves back for minutes (seen live Sep 13 2026). So the ledger decides what the page cannot: a message this install
+    never posted cannot be duplicated, and one it did post is read back by its ts. verify passes trust_ledger=False to
+    check Slack itself."""
     c = client()
     oldest = str(time.time() - 7 * 86400)
     if thread_ts:
-        msgs = _messages(lambda: c.conversations_replies(channel=channel(), ts=thread_ts, include_all_metadata=True, limit=200))
+        def fetch():
+            return c.conversations_replies(channel=channel(), ts=thread_ts, include_all_metadata=True, limit=200)
     else:
-        msgs = _messages(lambda: c.conversations_history(channel=channel(), oldest=oldest, include_all_metadata=True, limit=200))
+        def fetch():
+            return c.conversations_history(channel=channel(), oldest=oldest, include_all_metadata=True, limit=200)
+    msgs = fetch()["messages"] if trust_ledger else _messages(fetch)
     for m in msgs:
         meta = m.get("metadata") or {}
         if meta.get("event_type") == EVENT and (meta.get("event_payload") or {}).get("key") == key:
             return m
-    return None
+    ts = _posted(key) if trust_ledger else None
+    if not ts:
+        return None
+    if not thread_ts:        # a parent: read it back by ts for the fields it stores
+        own = c.conversations_replies(channel=channel(), ts=ts, include_all_metadata=True, limit=1).get("messages") or []
+        if own and own[0].get("ts") == ts:
+            return own[0]
+    return {"ts": ts, "metadata": None}
 
 
 def version(text, blocks):

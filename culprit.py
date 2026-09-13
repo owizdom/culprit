@@ -261,7 +261,7 @@ def cmd_run(pr):
 MAX_ATTEMPTS = 3
 
 
-def cmd_watch(interval=15):
+def cmd_watch(interval=5):
     from apps import http
     from runs import store
     seen, failures, etag, last_error = set(), {}, None, None

@@ -219,12 +219,31 @@ def test_an_empty_page_from_slack_does_not_post_a_second_parent(fakes):
     assert len(parents(fakes)) == 1
 
 
-def test_slack_that_never_answers_raises_instead_of_posting(fakes):
+def test_slack_that_never_answers_still_never_posts_twice(fakes, monkeypatch):
+    """The ledger holds the parent's ts, so an empty page neither blocks the publish nor posts a second parent."""
     act.publish(PR, blame(), PATCH)
     fakes["flaky"]["empty"] = 99
+    slept = []
+    monkeypatch.setattr(slack.time, "sleep", slept.append)
+    assert act.publish(PR, blame(), PATCH)["created"] == 0
+    assert len(parents(fakes)) == 1 and slept == []
+
+
+def test_a_first_post_is_not_held_up_by_an_empty_page(fakes, monkeypatch):
+    """Nothing to duplicate before this install has posted for the pull request, so one look at Slack is enough."""
+    fakes["flaky"]["empty"] = 99
+    slept = []
+    monkeypatch.setattr(slack.time, "sleep", slept.append)
+    act.publish(PR, blame(), PATCH)
+    assert len(parents(fakes)) == 1 and slept == []
+
+
+def test_verify_still_checks_slack_itself(fakes, monkeypatch):
+    act.publish(PR, blame(), PATCH)
+    fakes["flaky"]["empty"] = 99
+    monkeypatch.setattr(slack.time, "sleep", lambda s: None)
     with pytest.raises(slack.Unanswered):
-        act.publish(PR, blame(), PATCH)
-    assert len(parents(fakes)) == 1
+        slack._find(str(PR), trust_ledger=False)
 
 
 def test_guard_refuses_writes_outside_the_allow_list():

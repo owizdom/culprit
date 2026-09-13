@@ -35,7 +35,7 @@ function steps(s: TestRunStatus): { title: string; detail: ReactNode; state: Ste
     },
     {
       title: finished ? 'CULPRIT found the culprit' : 'CULPRIT investigating',
-      detail: s.investigation ? 'Reproducing, ruling out harmless edits, proving the culprit, fixing the line' : 'The watcher checks CI every 15 seconds',
+      detail: s.investigation ? 'Reproducing, ruling out harmless edits, proving the culprit, fixing the line' : 'The watcher checks CI every 5 seconds',
       state: finished ? 'done' : s.ci === 'failure' ? 'active' : 'pending',
     },
     {

@@ -34,7 +34,7 @@ def end_state(pr, sha, expect_closed=False):
         problems.append("skipped Slack: no SLACK_BOT_TOKEN")
     else:
         try:
-            parent = slack._find(str(pr))
+            parent = slack._find(str(pr), trust_ledger=False)
         except slack.Unanswered as e:
             problems.append(f"could not check Slack: {e}")
             parent = False
