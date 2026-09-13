@@ -4,7 +4,9 @@ __pycache__/
 .pytest_cache/
 .cache/
 runs/*/
-runs/ledger.jsonl
+# The live runs BRIEF.md cites (PR #1, PR #3) and the write ledger are kept as evidence; *.vcd traces stay local.
+!runs/1@ecb8884f857c/
+!runs/3@304329a059fc/
 runs/watcher.json
 runs/testrun.json
 config.local.yaml

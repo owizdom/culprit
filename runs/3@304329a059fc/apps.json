@@ -1,0 +1,31 @@
+{
+  "github": {
+    "comment_url": "https://github.com/owizdom/picorv32-ci/pull/3#discussion_r4000196505",
+    "suggestion": true,
+    "status": "success",
+    "synced": "2026-09-13T16:54:58+00:00",
+    "pr_url": "https://github.com/owizdom/picorv32-ci/pull/3"
+  },
+  "linear": {
+    "identifier": "WIS-7",
+    "state": "Done",
+    "assignee": "wisdom",
+    "url": "https://linear.app/culprit12/issue/WIS-7/culprit-3-picorv32v1246-breaks-the-tests-in-alu-group-the-single-cycle",
+    "synced": "2026-09-13T16:54:58+00:00"
+  },
+  "slack": {
+    "permalink": "https://cheaptalkworkspace.slack.com/archives/C0C1KQR847N/p1789318022013789?thread_ts=1789318022.013789&cid=C0C1KQR847N",
+    "replies": [
+      {
+        "text": "picorv32.v:1246 broke PR #3 at 304329a. The fix passes all tests. <https://github.com/owizdom/picorv32-ci/pull/3#discussion_r4000196505>",
+        "ts": "1789318023.564449"
+      },
+      {
+        "text": "Resolved: CI is green on 08bd683.",
+        "ts": "1789318494.383179"
+      }
+    ],
+    "synced": "2026-09-13T16:55:01+00:00",
+    "ts": "1789318022.013789"
+  }
+}

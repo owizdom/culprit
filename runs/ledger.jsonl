@@ -1,0 +1,46 @@
+{"t": "2026-09-13T04:23:33+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/pulls/1/comments", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:23:36+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee", "key": "status:ecb8884f857c:failure", "id": 54062944172}
+{"t": "2026-09-13T04:23:52+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee", "key": "status:ecb8884f857c:failure", "id": 54062948375}
+{"t": "2026-09-13T04:26:18+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:27:06+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:38:37+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:38:38+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee", "key": "status:ecb8884f857c:failure", "id": 54063179288}
+{"t": "2026-09-13T04:40:39+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:40:40+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee", "key": "status:ecb8884f857c:failure", "id": 54063211226}
+{"t": "2026-09-13T04:44:06+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T04:44:09+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee", "key": "status:ecb8884f857c:failure", "id": 54063265145}
+{"t": "2026-09-13T05:14:12+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998710834", "key": "<!-- culprit:1@ecb8884f857c -->", "id": 3998710834}
+{"t": "2026-09-13T05:14:14+00:00", "app": "linear", "op": "issueCreate", "target": "[culprit #1] regression in Tidy regfile write", "key": "[culprit #1]", "id": "da5b3722-3bc7-4f3e-8e6b-ebeab187cfc0"}
+{"t": "2026-09-13T05:14:15+00:00", "app": "linear", "op": "commentCreate", "target": "[culprit #1]", "key": "culprit:1@ecb8884f857c", "id": "da5b3722-3bc7-4f3e-8e6b-ebeab187cfc0"}
+{"t": "2026-09-13T05:25:01+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "1", "id": "1789277100.871029"}
+{"t": "2026-09-13T05:25:02+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "1:ecb8884f857c", "id": "1789277102.649379"}
+{"t": "2026-09-13T05:30:37+00:00", "app": "linear", "op": "issueUpdate", "target": "[culprit #1]", "key": "close:1", "id": "da5b3722-3bc7-4f3e-8e6b-ebeab187cfc0"}
+{"t": "2026-09-13T05:30:39+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "1:resolved:f7c66512403c", "id": "1789277439.647129"}
+{"t": "2026-09-13T05:30:41+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/f7c66512403c05e7846d64933f9b4d752445ac2e", "key": "status:f7c66512403c:success", "id": 54064012773}
+{"t": "2026-09-13T06:52:06+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/pulls/2/comments", "key": "<!-- culprit:2@60991bd3b295 -->", "id": 3998989483}
+{"t": "2026-09-13T06:52:08+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/60991bd3b295dcf2bcf29551b2e58e626a947e61", "key": "status:60991bd3b295:failure", "id": 54065339168}
+{"t": "2026-09-13T06:52:09+00:00", "app": "linear", "op": "issueCreate", "target": "[culprit #2] picorv32.v:1131 breaks the tests in \"decoder: annotate immediate formats; rename pcpi timeout counter\"", "key": "[culprit #2]", "id": "ddd627dc-d46e-412d-8ae7-4ccbc3fcd320"}
+{"t": "2026-09-13T06:52:11+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "2", "id": "1789282331.584499"}
+{"t": "2026-09-13T06:52:13+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "2:60991bd3b295", "id": "1789282333.564889"}
+{"t": "2026-09-13T06:52:15+00:00", "app": "linear", "op": "commentCreate", "target": "[culprit #2]", "key": "culprit:2@60991bd3b295", "id": "ddd627dc-d46e-412d-8ae7-4ccbc3fcd320"}
+{"t": "2026-09-13T06:52:41+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998989483", "key": "<!-- culprit:2@60991bd3b295 -->", "id": 3998989483}
+{"t": "2026-09-13T06:52:43+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/60991bd3b295dcf2bcf29551b2e58e626a947e61", "key": "status:60991bd3b295:failure", "id": 54065348265}
+{"t": "2026-09-13T06:52:45+00:00", "app": "slack", "op": "chat.update", "target": "C0C1KQR847N", "key": "2", "id": "1789282331.584499"}
+{"t": "2026-09-13T06:53:23+00:00", "app": "github", "op": "PATCH", "target": "/repos/owizdom/picorv32-ci/pulls/comments/3998989483", "key": "<!-- culprit:2@60991bd3b295 -->", "id": 3998989483}
+{"t": "2026-09-13T06:53:24+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/60991bd3b295dcf2bcf29551b2e58e626a947e61", "key": "status:60991bd3b295:failure", "id": 54065359095}
+{"t": "2026-09-13T06:53:27+00:00", "app": "slack", "op": "chat.update", "target": "C0C1KQR847N", "key": "2", "id": "1789282331.584499"}
+{"t": "2026-09-13T16:44:36+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/pulls", "key": "culprit-test/a01-20260913-184428", "id": 3}
+{"t": "2026-09-13T16:46:57+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/pulls/3/comments", "key": "<!-- culprit:3@304329a059fc -->", "id": 4000196505}
+{"t": "2026-09-13T16:46:59+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/304329a059fc9224c4031ca18c560d3405ea63f7", "key": "status:304329a059fc:failure", "id": 54076284891}
+{"t": "2026-09-13T16:47:00+00:00", "app": "linear", "op": "issueCreate", "target": "[culprit #3] picorv32.v:1246 breaks the tests in \"ALU: group the single-cycle comparators\"", "key": "[culprit #3]", "id": "8852bd04-1269-46de-85e7-5b54f66eccb8"}
+{"t": "2026-09-13T16:47:02+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "3", "id": "1789318022.013789"}
+{"t": "2026-09-13T16:47:03+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "3:304329a059fc", "id": "1789318023.564449"}
+{"t": "2026-09-13T16:47:05+00:00", "app": "linear", "op": "commentCreate", "target": "[culprit #3]", "key": "culprit:3@304329a059fc", "id": "8852bd04-1269-46de-85e7-5b54f66eccb8"}
+{"t": "2026-09-13T16:49:51+00:00", "app": "linear", "op": "commentCreate", "target": "[culprit #3]", "key": "culprit:3:resolved:08bd6835abfa", "id": "8852bd04-1269-46de-85e7-5b54f66eccb8"}
+{"t": "2026-09-13T16:49:52+00:00", "app": "linear", "op": "issueUpdate", "target": "[culprit #3]", "key": "close:3", "id": "8852bd04-1269-46de-85e7-5b54f66eccb8"}
+{"t": "2026-09-13T16:54:53+00:00", "app": "slack", "op": "chat.update", "target": "C0C1KQR847N", "key": "3", "id": "1789318022.013789"}
+{"t": "2026-09-13T16:54:54+00:00", "app": "slack", "op": "chat.postMessage", "target": "C0C1KQR847N", "key": "3:resolved:08bd6835abfa", "id": "1789318494.383179"}
+{"t": "2026-09-13T16:54:56+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/08bd6835abfa18d1bf6297d30d89ce728bb1255e", "key": "status:08bd6835abfa:success", "id": 54076464446}
+{"t": "2026-09-13T18:05:20+00:00", "app": "linear", "op": "commentCreate", "target": "[culprit #2]", "key": "culprit:2:resolved:d3a7d372b334", "id": "ddd627dc-d46e-412d-8ae7-4ccbc3fcd320"}
+{"t": "2026-09-13T18:05:21+00:00", "app": "linear", "op": "issueUpdate", "target": "[culprit #2]", "key": "close:2", "id": "ddd627dc-d46e-412d-8ae7-4ccbc3fcd320"}
+{"t": "2026-09-13T18:07:27+00:00", "app": "github", "op": "POST", "target": "/repos/owizdom/picorv32-ci/statuses/d3a7d372b3349566583b92b5823fdbf6f2f7bf46", "key": "status:d3a7d372b334:success", "id": 54078132782}

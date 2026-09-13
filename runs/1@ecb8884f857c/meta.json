@@ -1,0 +1,26 @@
+{
+  "id": "1@ecb8884f857c",
+  "pr": 1,
+  "sha": "ecb8884f857c54ca93b22d56fe3b69e3fe1bc7ee",
+  "status": "resolved",
+  "started": "2026-09-13T04:23:27+00:00",
+  "finished": "2026-09-13T05:25:24+00:00",
+  "sims": 3,
+  "title": "Tidy regfile write",
+  "author": "owizdom",
+  "base_sha": "29016cc82233b9262539dec0f2b4ba5545276e83",
+  "url": "https://github.com/owizdom/picorv32-ci/pull/1",
+  "failing_test": null,
+  "trap_cycle": 8222,
+  "failure": "wrote outside memory at an unknown address (x), cycle 8,222",
+  "verdict": {
+    "path": "picorv32.v",
+    "line": 1344,
+    "test": null,
+    "failure": "wrote outside memory at an unknown address (x), cycle 8,222",
+    "trust": "confirmed"
+  },
+  "seconds": 10.9,
+  "cost_usd": 0.0,
+  "resolved_sha": "f7c66512403c05e7846d64933f9b4d752445ac2e"
+}

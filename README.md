@@ -67,7 +67,8 @@ CULPRIT runs the simulation on your machine, so it needs **Icarus Verilog** and 
 - **Hidden answers.** 30 hand-built bugs plus 35 generated ones hidden among harmless edits, graded blind.
 - **Stable.** Three runs: CULPRIT's grades were identical on all 30 hand-built cases.
 - **Real bugs.** Two bugs the PicoRV32 author fixed upstream, put back into today's code: CULPRIT's fix matched the author's.
-- **Live.** Publishing the same failure again creates nothing (`created 0, unchanged 4`). Four failures found by running it for real, each fixed with a test.
+- **Where the model helps.** CULPRIT's simulator search alone, with no model, already finds every culprit (58/58) with 0 wrong blames; the fix step with Claude takes passing fixes from 54/58 to 58/58.
+- **Live.** Publishing the same failure again creates nothing (`created 0, unchanged 4`). Four failures found by running it for real, each fixed with a test. The live runs on PR #1 and PR #3 are in [`runs/`](runs/).
 - **Portable.** Icarus Verilog 12 and 13 agree on 31/31 runs. 66 tests, and CI runs a real investigation on macOS, Windows and Linux.
 - **Cheap.** $0.02 of model spend per case on average.
 

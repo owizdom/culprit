@@ -1,0 +1,14 @@
+{
+  "trust": "confirmed",
+  "path": "picorv32.v",
+  "start": 1344,
+  "end": 1344,
+  "before": "\t\t\tcpuregs[latched_rd ^ 1] <= cpuregs_wrdata;\n",
+  "replacement": "\t\t\tcpuregs[latched_rd] <= cpuregs_wrdata;\n",
+  "method": "revert_edit",
+  "attempts": 0,
+  "explanation": "this one-line edit is the only RTL change and undoing it passes; there is nothing else in it to keep",
+  "result": "ALL TESTS PASSED.",
+  "cost_usd": 0.0,
+  "lines_changed": 1
+}

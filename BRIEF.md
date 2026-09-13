@@ -97,6 +97,7 @@ All 65 hand-built and generated cases, with 95% Wilson intervals:
 **What the numbers say.**
 - Every culprit and fix CULPRIT offers has passed the simulator: 58 of 58 fixes pass, 0 of 65 blames are wrong, and the grades did not move across three runs. Claude alone blamed the wrong edit 5 times and 7 of its fixes do not pass, and nothing in its answer says which.
 - At this sample size the intervals still touch, but CULPRIT is never behind on passing fixes or wrong blame, on any corpus or any run.
+- Where the model helps: CULPRIT's simulator search alone, with no model, already finds every culprit (58/58) with 0 wrong blames. The fix step with Claude is what takes passing fixes from 54/58 to 58/58 and fixes that keep the author's work from 44/54 to 51/54.
 - Where CULPRIT does not win: the exact line is a tie (54 against 53). Its four misses are passing fixes placed on another line of the same edit, and the cheap one-line restore drops intended work next to the bug on 3 of 19 hand-built cases.
 - On the 2 real upstream bugs, every fix equals the author's.
 - Icarus Verilog 12 and 13 give the same status, trap cycle, failing test and byte-identical log on all 31 runs (`evals/results/icarus12.md`).

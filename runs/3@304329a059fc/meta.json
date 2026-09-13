@@ -1,0 +1,26 @@
+{
+  "id": "3@304329a059fc",
+  "pr": 3,
+  "sha": "304329a059fc9224c4031ca18c560d3405ea63f7",
+  "status": "resolved",
+  "started": "2026-09-13T16:46:00+00:00",
+  "finished": "2026-09-13T16:47:09+00:00",
+  "sims": 8,
+  "title": "ALU: group the single-cycle comparators",
+  "author": "owizdom",
+  "base_sha": "29016cc82233b9262539dec0f2b4ba5545276e83",
+  "url": "https://github.com/owizdom/picorv32-ci/pull/3",
+  "failing_test": "blt",
+  "cost_usd": 0.0095,
+  "trap_cycle": 999900,
+  "failure": "blt..ERROR at cycle 999,900",
+  "verdict": {
+    "path": "picorv32.v",
+    "line": 1246,
+    "test": "blt",
+    "failure": "blt..ERROR at cycle 999,900",
+    "trust": "confirmed"
+  },
+  "seconds": 69.0,
+  "resolved_sha": "08bd6835abfa18d1bf6297d30d89ce728bb1255e"
+}

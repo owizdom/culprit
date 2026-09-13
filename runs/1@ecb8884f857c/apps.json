@@ -1,0 +1,31 @@
+{
+  "github": {
+    "comment_url": "https://github.com/owizdom/picorv32-ci/pull/1#discussion_r3998710834",
+    "suggestion": true,
+    "status": "success",
+    "synced": "2026-09-13T05:36:31+00:00",
+    "pr_url": "https://github.com/owizdom/picorv32-ci/pull/1"
+  },
+  "linear": {
+    "identifier": "WIS-5",
+    "state": "Done",
+    "assignee": "wisdom",
+    "url": "https://linear.app/culprit12/issue/WIS-5/culprit-1-regression-in-tidy-regfile-write",
+    "synced": "2026-09-13T05:36:31+00:00"
+  },
+  "slack": {
+    "permalink": "https://cheaptalkworkspace.slack.com/archives/C0C1KQR847N/p1789277100871029?thread_ts=1789277100.871029&cid=C0C1KQR847N",
+    "replies": [
+      {
+        "text": "picorv32.v:1344 (rtl). confirmed: head fails (wrote outside memory at an unknown address (x), cycle 8,222); merge base passes; confirmed: undoing only the edit at line 1344 makes the regression pass\nReview comment: <https://github.com/owizdom/picorv32-ci/pull/1#discussion_r3998710834>",
+        "ts": "1789277102.649379"
+      },
+      {
+        "text": "Resolved: CI is green on f7c66512403c.",
+        "ts": "1789277439.647129"
+      }
+    ],
+    "synced": "2026-09-13T05:36:33+00:00",
+    "ts": "1789277100.871029"
+  }
+}
