@@ -1,4 +1,4 @@
-"""Turn results/raw/*.jsonl into results/REPORT.md.
+"""Turn evals/results/raw/*.jsonl into evals/results/REPORT.md.
 
 Every rate carries a 95% Wilson interval; zero events use the exact one-sided bound.
 """
@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from evals.power import wilson, zero_event_upper  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = ROOT / "results" / "raw"
+RAW = ROOT / "evals" / "results" / "raw"
 NAMES = {"A": "LLM only", "B": "Delta debugging + circuit proof", "C": "CULPRIT"}
 RATE_METRICS = [("hunk_loc", "Culprit edit found"), ("line_loc", "Exact line found"), ("validated_fix", "Fix passes"),
                 ("intent_fix", "Fix keeps the author's work"), ("wrong_blame", "Wrong blame (lower is better)"),
@@ -87,7 +87,7 @@ HISTORY_METRICS = [("hunk_loc", "Culprit edit found"), ("line_loc", "Exact line 
 
 
 def tagged(tag, metrics):
-    """Every arm's rates on one extra corpus, e.g. tag 'mutants' reads results/raw/<arm>.mutants.jsonl."""
+    """Every arm's rates on one extra corpus, e.g. tag 'mutants' reads evals/results/raw/<arm>.mutants.jsonl."""
     arms = []
     for arm in ("A", "B", "C"):
         rows = rows_of(f"{arm}.{tag}")
@@ -178,17 +178,17 @@ def markdown(summary):
                   "| Metric | " + " | ".join(f"{a['arm']}: {a['name']}" for a in arms) + " |", "|---|" + "---|" * len(arms)]
         for metric, label in RATE_METRICS:
             lines.append(f"| {label} | " + " | ".join(pct(a["metrics"][metric]) for a in arms) + " |")
-    icarus12 = ROOT / "results" / "icarus12.md"
+    icarus12 = ROOT / "evals" / "results" / "icarus12.md"
     if icarus12.exists():
         agreement = next((l for l in icarus12.read_text().splitlines() if l.lower().startswith("agreement")), None)
-        lines += ["", "## Icarus Verilog 12 against 13", "", (agreement or "See results/icarus12.md.") +
-                  " Details in results/icarus12.md."]
+        lines += ["", "## Icarus Verilog 12 against 13", "", (agreement or "See evals/results/icarus12.md.") +
+                  " Details in evals/results/icarus12.md."]
     return "\n".join(lines) + "\n"
 
 
 def main():
     summary = summarize()
-    out = ROOT / "results"
+    out = ROOT / "evals" / "results"
     out.mkdir(exist_ok=True)
     (out / "REPORT.md").write_text(markdown(summary))
     print(markdown(summary))

@@ -15,7 +15,7 @@ from apps import github, http
 from runs import store
 
 CORPUS = http.ROOT / "corpus"
-# Cases where the evaluation's CULPRIT arm (results/REPORT.md) found the culprit edit and its fix passed every
+# Cases where the evaluation's CULPRIT arm (evals/results/REPORT.md) found the culprit edit and its fix passed every
 # test while keeping the author's intended change.
 POOL = ["a01", "m03", "a07", "m05", "a04", "m01", "a02", "m06", "a09", "h03", "a03", "m04", "a05", "m02", "m08", "m07"]
 STALE_SECONDS = 20 * 60

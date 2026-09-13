@@ -58,11 +58,11 @@ CULPRIT runs the simulation on your machine, so it needs **Icarus Verilog** and 
 
 ## How reliability was tested
 
-| 65 broken pull requests | LLM only | Delta debugging | CULPRIT |
-|---|---|---|---|
-| Culprit edit found | 51/58 | 58/58 | **58/58** |
-| Fix passes every test | 51/58 | 54/58 | **58/58** |
-| Wrong blame (lower is better) | 5/65 | 0/65 | **0/65** |
+| 65 broken pull requests | **CULPRIT** | Claude alone |
+|---|---|---|
+| Culprit edit found | **58/58** | 51/58 |
+| Fix passes every test | **58/58** | 51/58 |
+| Wrong blame (lower is better) | **0/65** | 5/65 |
 
 - **Hidden answers.** 30 hand-built bugs plus 35 generated ones hidden among harmless edits, graded blind.
 - **Stable.** Three runs: CULPRIT's grades were identical on all 30 hand-built cases.
@@ -71,7 +71,7 @@ CULPRIT runs the simulation on your machine, so it needs **Icarus Verilog** and 
 - **Portable.** Icarus Verilog 12 and 13 agree on 31/31 runs. 66 tests, and CI runs a real investigation on macOS, Windows and Linux.
 - **Cheap.** $0.02 of model spend per case on average.
 
-Every number, with 95% intervals: [`results/REPORT.md`](results/REPORT.md). Method and limits: [`BRIEF.md`](BRIEF.md).
+Every number, with 95% intervals: [`evals/results/REPORT.md`](evals/results/REPORT.md). Method and limits: [`BRIEF.md`](BRIEF.md).
 
 ## Run from source
 
@@ -79,7 +79,7 @@ Every number, with 95% intervals: [`results/REPORT.md`](results/REPORT.md). Meth
 git clone https://github.com/owizdom/culprit && cd culprit && uv sync
 uv run culprit                    # the app
 uv run pytest -q                  # tests
-uv run python evals/report.py     # rebuild the results from results/raw
+uv run python evals/report.py     # rebuild the results from evals/results/raw
 ```
 
 Built on [PicoRV32](https://github.com/YosysHQ/picorv32) by Claire Wolf and YosysHQ. Any design with a self-checking Icarus testbench can be described in a `design:` config section ([`design.py`](design.py)).

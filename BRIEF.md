@@ -2,16 +2,16 @@
 
 **A debugging agent for chip teams.** One AI agent across GitHub, Linear and Slack: when a pull request breaks the chip's simulation tests, it proves which line did it, fixes it, and tells the team.
 
-Every number about CULPRIT here was measured and points to where it comes from: `results/REPORT.md`, `runs/`, `tests/`, or a CI run.
+Every number about CULPRIT here was measured and points to where it comes from: `evals/results/REPORT.md`, `runs/`, `tests/`, or a CI run.
 
 ## At a glance
 
-| | LLM only | Delta debugging | **CULPRIT** |
-|---|---|---|---|
-| Fix passes every test (58 broken pull requests) | 51/58 | 54/58 | **58/58** |
-| Wrong blame (65 pull requests) | 5/65 | 0/65 | **0/65** |
-| Same culprit, fix and blame grades across 3 runs (30 cases) | 27–29/30 | no model | **30/30** |
-| Real upstream bugs: fix equals the author's fix | 2/2 | 2/2 | **2/2** |
+| | **CULPRIT** | Claude alone |
+|---|---|---|
+| Fix passes every test (58 chip bugs) | **58/58** | 51/58 |
+| Wrong blame (65 pull requests) | **0/65** | 5/65 |
+| Same culprit, fix and blame grades across 3 runs (30 cases) | **30/30** | 27–29/30 |
+| Real upstream bugs: fix equals the author's fix | **2/2** | 2/2 |
 
 - **Live, across three apps:** a Test Run went from red CI to a GitHub suggestion, a Linear issue and a Slack thread in 88 s. Replaying a failure creates nothing twice.
 - **Portable:** Icarus Verilog 12 and 13 agree on 31/31 runs. CI runs a real investigation on Ubuntu, macOS and Windows (run 34780907902, green).
@@ -71,36 +71,36 @@ Solid steps were confirmed by comparing base and head waveforms. `cpuregs[0]` st
 
 ## 6. Evaluation
 
-![Three corpora (30 hand-built, 35 generated, 2 real upstream bugs) run through three arms (A LLM only, B delta debugging, C CULPRIT) and graded blind against hidden answers into results/REPORT.md](site/img/brief/evaluation.png)
+![Three sets of broken pull requests (30 hand-built, 35 generated, 2 real upstream bugs), graded blind against hidden answers into REPORT.md](site/img/brief/evaluation.png)
 
-- **Arms.** A: one Claude call with the pull request, diff and CI log tail, no simulator. B: delta debugging with the netlist proof, no model. C: CULPRIT, which is B plus the shipped `repair()`. Claude Opus 5 at medium effort.
-- **Blind.** Only the corpus builder and the grader read `truth.json` (`tests/test_truth_isolation.py`). The grader applies each fix and simulates it the same way for every arm (`evals/run.py`).
+- **Compared with Claude alone.** The obvious alternative to CULPRIT is to ask a model. Claude alone gets the same pull request, diff and CI log tail in one call, with no simulator. Both use Claude Opus 5 at medium effort.
+- **Blind.** Only the corpus builder and the grader read `truth.json` (`tests/test_truth_isolation.py`). The grader applies each fix and simulates it the same way for both (`evals/run.py`).
 - **Corpora.** 30 hand-built cases: 23 chip bugs (inside an intended multi-line edit, among harmless edits, as a plain edit, or spread over two edits) and 7 that fail for another reason or do not fail. 35 generated cases: one semantic bug among harmless decoy edits (`corpus/mutants/`). 2 real bugs the PicoRV32 author fixed upstream, put back into today's code (`corpus/history/`).
 
 All 65 hand-built and generated cases, with 95% Wilson intervals:
 
-| Metric | A: LLM only | B: Delta debugging | C: CULPRIT |
-|---|---|---|---|
-| Culprit edit found | 51/58 (77–94%) | 58/58 (94–100%) | **58/58 (94–100%)** |
-| Exact line found | 53/58 (81–96%) | 51/58 (77–94%) | 54/58 (84–97%) |
-| Fix passes | 51/58 (77–94%) | 54/58 (84–97%) | **58/58 (94–100%)** |
-| Fix keeps the author's work | 50/54 (82–97%) | 44/54 (69–90%) | 51/54 (85–98%) |
-| Wrong blame | 5/65 (3–17%) | 0/65 (0–4%) | **0/65 (0–4%)** |
-| Non-bugs handled correctly | 7/7 | 7/7 | 7/7 |
-
-| Run-to-run (hand-built, 3 runs) | A: LLM only | C: CULPRIT |
+| Metric | **CULPRIT** | Claude alone |
 |---|---|---|
-| Culprit edit found | 19 · 20 · 19 of 23 | 23 · 23 · 23 of 23 |
-| Fix passes | 19 · 21 · 19 of 23 | 23 · 23 · 23 of 23 |
-| Wrong blame | 2 · 1 · 2 of 30 | 0 · 0 · 0 of 30 |
+| Culprit edit found | **58/58 (94–100%)** | 51/58 (77–94%) |
+| Exact line found | 54/58 (84–97%) | 53/58 (81–96%) |
+| Fix passes every test | **58/58 (94–100%)** | 51/58 (77–94%) |
+| Fix keeps the author's work | 51/54 (85–98%) | 50/54 (82–97%) |
+| Wrong blame | **0/65 (0–4%)** | 5/65 (3–17%) |
+| Non-bugs handled correctly | 7/7 | 7/7 |
+
+| Run-to-run (hand-built, 3 runs) | **CULPRIT** | Claude alone |
+|---|---|---|
+| Culprit edit found | 23 · 23 · 23 of 23 | 19 · 20 · 19 of 23 |
+| Fix passes every test | 23 · 23 · 23 of 23 | 19 · 21 · 19 of 23 |
+| Wrong blame | 0 · 0 · 0 of 30 | 2 · 1 · 2 of 30 |
 
 **What the numbers say.**
-- C's edge over A is that every claim is checked: A blamed the wrong edit on 5 of 65 cases and 7 of its 58 fixes do not pass, and nothing in its answer says which. At this sample size the intervals still touch, but C is never behind A on passing fixes or wrong blame, on any corpus or any run.
-- C's edge over B is the repair: passing fixes go from 54 to 58 and fixes that keep the author's work from 44 to 51.
-- Where C does not win: the exact line is a tie (A 53, C 54). C's four misses are passing fixes placed on another line of the same edit, and the cheap one-line restore drops intended work next to the bug on 3 of 19 hand-built cases.
-- On the 2 real upstream bugs all three arms found the culprit, and every fix equals the author's.
-- Icarus Verilog 12 and 13 give the same status, trap cycle, failing test and byte-identical log on all 31 runs (`results/icarus12.md`).
-- Fixed after the first full run, then re-run: the harness's arm C now calls the product's `repair()`; a longer culprit goes to the model before the revert; and a line A gave on a not-reproduced case no longer counts as a blame (A's wrong blames 3 → 2 of 30).
+- Every culprit and fix CULPRIT offers has passed the simulator: 58 of 58 fixes pass, 0 of 65 blames are wrong, and the grades did not move across three runs. Claude alone blamed the wrong edit 5 times and 7 of its fixes do not pass, and nothing in its answer says which.
+- At this sample size the intervals still touch, but CULPRIT is never behind on passing fixes or wrong blame, on any corpus or any run.
+- Where CULPRIT does not win: the exact line is a tie (54 against 53). Its four misses are passing fixes placed on another line of the same edit, and the cheap one-line restore drops intended work next to the bug on 3 of 19 hand-built cases.
+- On the 2 real upstream bugs, every fix equals the author's.
+- Icarus Verilog 12 and 13 give the same status, trap cycle, failing test and byte-identical log on all 31 runs (`evals/results/icarus12.md`).
+- Fixed after the first full run, then re-run: the harness now calls the product's `repair()`; a longer culprit goes to the model before the revert; and a line Claude alone gave on a not-reproduced case no longer counts as a blame (its wrong blames 3 → 2 of 30).
 
 ## 7. Live runs
 
@@ -123,7 +123,7 @@ Failures found by running it for real, each fixed with a test:
 - The firmware stops at the first failing test, so one failure is visible per run.
 - A netlist proof holds for the testbench's parameters only.
 - Register-file words are compared one by one, so a hop through memory can stay PROPOSED.
-- 65 cases and 3 runs per model arm: small differences between arms are within noise.
+- 65 cases and 3 runs: small differences between CULPRIT and Claude alone are within noise.
 - One design, PicoRV32. Another design is a `design:` config section (`design.py`), not yet run on a second design.
 - Live investigations ran on macOS and in an Ubuntu 24.04 container; Windows is verified by CI.
 

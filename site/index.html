@@ -137,7 +137,7 @@
     <div class="stats">
       <div class="stat"><b>14%</b><p>of IC and ASIC projects reach first-silicon success.</p><small>Siemens / Wilson Research Group, 2024 functional verification study</small></div>
       <div class="stat"><b>47%</b><p>of a verification engineer's time goes to debug, the largest single share.</p><small>Wilson Research Group study, as cited by Sigasi</small></div>
-      <div class="stat"><b>1 line</b><p>is usually the cause. CULPRIT names it, with the simulator runs that prove it.</p><small>Measured on 23 seeded RTL bugs, see the proof below</small></div>
+      <div class="stat"><b>1 line</b><p>is usually the cause. CULPRIT names it, with the simulator runs that prove it.</p><small>Measured on 58 chip bugs, see the proof below</small></div>
     </div>
   </div>
 </section>
@@ -191,24 +191,23 @@
 <section id="proof" style="background: var(--bg-2)">
   <div class="wrap">
     <div class="eyebrow">The proof</div>
-    <h2 class="serif">Measured on 30 broken pull requests, ties reported as ties.</h2>
-    <p class="sub">Each case is a seeded pull request on the PicoRV32 RISC-V CPU with its true culprit known. CULPRIT is compared with an LLM given the same pull request and log, and with delta debugging that uses no model.</p>
+    <h2 class="serif">Measured on 65 broken pull requests, graded blind.</h2>
+    <p class="sub">Each case is a pull request on the PicoRV32 RISC-V CPU with its true culprit known. CULPRIT is compared with the obvious alternative: Claude alone, given the same pull request and log but no simulator.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Measure</th><th>LLM only</th><th>Delta debugging</th><th>CULPRIT</th></tr></thead>
+        <thead><tr><th>Measure</th><th>CULPRIT</th><th>Claude alone</th></tr></thead>
         <tbody>
-          <tr><td>Culprit edit found</td><td class="num">19/23</td><td class="num">23/23</td><td class="num best">23/23</td></tr>
-          <tr><td>Exact line found</td><td class="num">21/23</td><td class="num">16/23</td><td class="num">19/23</td></tr>
-          <tr><td>Fix passes the tests</td><td class="num">19/23</td><td class="num">19/23</td><td class="num best">23/23</td></tr>
-          <tr><td>Fix keeps the author's work</td><td class="num">18/19</td><td class="num">9/19</td><td class="num">16/19</td></tr>
-          <tr><td>Wrong blame (lower is better)</td><td class="num">2/30</td><td class="num">0/30</td><td class="num best">0/30</td></tr>
-          <tr><td>Correct when the chip is not at fault</td><td class="num">7/7</td><td class="num">7/7</td><td class="num">7/7</td></tr>
-          <tr><td>Median time per case</td><td class="num">5.5 s</td><td class="num">0.7 s</td><td class="num">0.7 s</td></tr>
+          <tr><td>Culprit edit found</td><td class="num best">58/58</td><td class="num">51/58</td></tr>
+          <tr><td>Fix passes every test</td><td class="num best">58/58</td><td class="num">51/58</td></tr>
+          <tr><td>Wrong blame (lower is better)</td><td class="num best">0/65</td><td class="num">5/65</td></tr>
+          <tr><td>Same grades over three runs (30 cases)</td><td class="num best">30/30</td><td class="num">27–29/30</td></tr>
+          <tr><td>Real upstream bugs fixed the way the author did</td><td class="num best">2/2</td><td class="num">2/2</td></tr>
+          <tr><td>Correct when the chip is not at fault</td><td class="num">7/7</td><td class="num">7/7</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">At this size most differences are within noise. The LLM alone names the exact line more often, but 4 of its fixes fail the tests and its answer does not say which. Every culprit CULPRIT reports was confirmed by a simulation. The test suite catches 37 of 40 seeded single-token mutants; the bugs it misses are invisible to CULPRIT too. Icarus Verilog 12, which CI installs, and Icarus Verilog 13 give byte-identical simulator logs on all 31 runs.</p>
-    <p class="note">Beyond these 30: across 65 cases, including 35 generated pull requests that hide a real bug among harmless edits, CULPRIT found the culprit edit in 58 of 58, its fix passed every test in 58 of 58, and it blamed the wrong edit 0 times; the LLM alone did so 5 times. Over three runs CULPRIT's grades were identical on all 30 seeded cases. On two bugs taken from the PicoRV32 author's own fix history, its fix was the author's fix.</p>
+    <p class="note">Every culprit and fix CULPRIT offers has passed the simulator. Claude alone blamed the wrong edit 5 times and 7 of its fixes do not pass, and its answer does not say which. The 65 cases are 30 hand-built pull requests and 35 generated ones that hide a real bug among harmless edits; the two upstream bugs come from the PicoRV32 author's own fix history. Icarus Verilog 12 and 13 give byte-identical simulator logs on all 31 runs.</p>
+    <p class="note">Limits, measured too: the test suite catches 37 of 40 seeded single-token mutants, and a bug it misses is invisible to CULPRIT. At this size the intervals between the two still touch. Every table: <a href="https://github.com/owizdom/culprit/blob/main/evals/results/REPORT.md">evals/results/REPORT.md</a>.</p>
   </div>
 </section>
 

@@ -70,4 +70,4 @@ The two corpora together; wider samples give narrower intervals. Cases: 65.
 
 ## Icarus Verilog 12 against 13
 
-Agreement: 31/31 runs (30 case heads + base) on status and trap cycle. Details in results/icarus12.md.
+Agreement: 31/31 runs (30 case heads + base) on status and trap cycle. Details in evals/results/icarus12.md.

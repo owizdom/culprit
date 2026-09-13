@@ -5,7 +5,7 @@
   C  CULPRIT: B, then a line-level fix (deterministic restore, or Claude with simulator feedback).
 
   uv run python evals/run.py --arms A,B,C [--cases a01,m07] [--run 2] [--corpus corpus/history/cases --tag history]
-Results are appended to results/raw/<arm>[.<tag>][.run<N>].jsonl and resumed on rerun. Needs the picorv32-ci checkout
+Results are appended to evals/results/raw/<arm>[.<tag>][.run<N>].jsonl and resumed on rerun. Needs the picorv32-ci checkout
 (CULPRIT_CHIP_REPO, default ../picorv32-ci next to this repository).
 """
 import json
@@ -21,7 +21,7 @@ from sim import icarus  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ROOT / "corpus" / "cases"
-RAW = ROOT / "results" / "raw"
+RAW = ROOT / "evals" / "results" / "raw"
 CHECKOUT = Path(os.environ.get("CULPRIT_CHIP_REPO") or ROOT.parent / "picorv32-ci")
 SUFFIX = ""     # ".history", ".run2", ...: which result file a run appends to
 

@@ -221,23 +221,23 @@ function About() {
         <ChipDiagram />
         <div className="about-stats">
           <div>
-            <b>23/23</b>
+            <b>58/58</b>
             <span>culprit edits found</span>
           </div>
           <div>
-            <b>21/23</b>
+            <b>58/58</b>
             <span>fixes pass every test</span>
           </div>
           <div>
-            <b>0/30</b>
+            <b>0/65</b>
             <span>wrong blames</span>
           </div>
           <div>
-            <b>0.7 s</b>
-            <span>median per case</span>
+            <b>30/30</b>
+            <span>same grades over 3 runs</span>
           </div>
         </div>
-        <p className="about-source">Measured on 30 seeded pull requests on PicoRV32 (results/REPORT.md).</p>
+        <p className="about-source">Measured on 65 broken pull requests on PicoRV32 (evals/results/REPORT.md).</p>
       </div>
     </section>
   )

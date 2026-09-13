@@ -5,7 +5,7 @@ local Icarus 13 through sim/icarus.run, run the same compile and vvp commands wi
 image (sim/Dockerfile.iv12), parse both logs with icarus.parse and compare them. No model calls.
 
   docker build -t culprit-iv12 -f sim/Dockerfile.iv12 sim/
-  .venv/bin/python evals/icarus12.py [--cases a01,r02] [--no-base] [--workers 4] [--out results]
+  .venv/bin/python evals/icarus12.py [--cases a01,r02] [--no-base] [--workers 4] [--out evals/results]
 Writes <out>/icarus12.json and <out>/icarus12.md.
 """
 import argparse
@@ -184,7 +184,7 @@ def main():
     ap.add_argument("--cases", help="comma-separated case ids (default: every kept case)")
     ap.add_argument("--no-base", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--out", default=str(ROOT / "results"))
+    ap.add_argument("--out", default=str(ROOT / "evals" / "results"))
     args = ap.parse_args()
     if not subprocess.run(["docker", "images", "-q", IMAGE], capture_output=True, text=True).stdout.strip():
         sys.exit(f"image {IMAGE} missing: docker build -t {IMAGE} -f sim/Dockerfile.iv12 sim/")
