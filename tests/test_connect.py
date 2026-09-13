@@ -46,6 +46,20 @@ def test_disconnect_removes_the_key(monkeypatch, files):
     assert "LINEAR_API_KEY" not in files["env"].read_text() and "ANTHROPIC_API_KEY=keep-me" in files["env"].read_text()
 
 
+def test_slack_shows_the_app_name_from_its_messages_not_the_old_handle(monkeypatch, files):
+    """Renaming a Slack app keeps the bot's @handle (auth.test's user); its messages carry the current name."""
+    history = {"ok": True, "messages": [{"user": "U1", "text": "hi"},
+                                        {"bot_id": "B1", "bot_profile": {"name": "CULPRIT"}}]}
+    calls = {"auth.test": {"ok": True, "user": "demo_app", "team": "Culprit", "bot_id": "B1"},
+             "conversations.history": history}
+    monkeypatch.setattr(connect, "slack_call", lambda value, method, **params: calls[method])
+    assert connect.check_slack("xoxb-1")["identity"] == "@demo_app"          # no channel set up yet
+    files["local"].write_text("slack:\n  channel: C0C1KQR847N\n")
+    assert connect.check_slack("xoxb-1")["identity"] == "CULPRIT"
+    history["messages"] = [{"bot_id": "B2", "bot_profile": {"name": "someone else"}}]
+    assert connect.check_slack("xoxb-1")["identity"] == "@demo_app"
+
+
 def test_the_claude_key_is_saved_only_after_its_check_passes(monkeypatch, files):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.setattr(connect, "check_anthropic", lambda v: connect.check(error="Anthropic rejected this key.", token=v))

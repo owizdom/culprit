@@ -96,7 +96,23 @@ def check_slack(value):
     if not body.get("ok"):
         error, fix = SLACK_ERRORS.get(body.get("error"), (f"Slack said {body.get('error')}.", None))
         return check(error=error, fix=fix, token=value)
-    return check(True, f"@{body['user']}", f"workspace {body['team']}", token=value)
+    name = slack_app_name(value, body.get("bot_id"))
+    return check(True, name or f"@{body['user']}", f"workspace {body['team']}", token=value)
+
+
+def slack_app_name(value, bot_id):
+    """The name people see on the bot's messages. auth.test returns only the bot's @handle, which Slack keeps when the
+    app is renamed, and bots.info needs a scope the app does not ask for. The bot's own messages in the configured
+    channel carry the app's current name; None until it has posted there."""
+    channel = (http.config().get("slack") or {}).get("channel")
+    if not channel or not bot_id:
+        return None
+    try:
+        body = slack_call(value, "conversations.history", channel=channel, limit=100)
+    except httpx.HTTPError:
+        return None
+    return next((m["bot_profile"]["name"] for m in body.get("messages") or []
+                 if m.get("bot_id") == bot_id and (m.get("bot_profile") or {}).get("name")), None)
 
 
 CHECKS = {"github": check_github, "linear": check_linear, "slack": check_slack}
