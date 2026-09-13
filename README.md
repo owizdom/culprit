@@ -5,7 +5,7 @@
 <p align="center"><b>A debugging agent for chip teams.</b><br>
 One AI agent across GitHub, Linear and Slack: when a pull request breaks the chip's simulation tests, it proves which line did it, fixes it, and tells the team.</p>
 
-<p align="center"><b>Demo video:</b> <i>link to be added</i> · <a href="https://culprit-beige.vercel.app">Website</a> · <a href="BRIEF.md">System &amp; reliability brief</a></p>
+<p align="center"><b><a href="https://youtu.be/MyJEnXO0vt4">▶ Demo video</a></b> · <a href="https://culprit-beige.vercel.app">Website</a> · <a href="BRIEF.md">System &amp; reliability brief</a></p>
 
 ![CULPRIT investigating a broken pull request](site/img/app-investigation.png)
 

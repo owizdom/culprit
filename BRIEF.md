@@ -2,6 +2,8 @@
 
 **A debugging agent for chip teams.** One AI agent across GitHub, Linear and Slack: when a pull request breaks the chip's simulation tests, it proves which line did it, fixes it, and tells the team.
 
+**Demo video:** https://youtu.be/MyJEnXO0vt4
+
 Every number about CULPRIT here was measured and points to where it comes from: `evals/results/REPORT.md`, `runs/`, `tests/`, or a CI run.
 
 ## At a glance
