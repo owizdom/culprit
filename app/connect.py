@@ -319,6 +319,10 @@ def check_repo(full_name):
     r = httpx.get(f"{GITHUB}/repos/{full_name}", timeout=15, headers=headers)
     if r.status_code == 404:
         return {"ok": False, "error": "GitHub cannot find that repository with this login."}
+    if r.status_code in (403, 429) and r.headers.get("x-ratelimit-remaining") == "0":
+        reset = time.strftime("%H:%M", time.localtime(int(r.headers.get("x-ratelimit-reset") or time.time())))
+        return {"ok": False, "error": f"GitHub's hourly API limit for this account is used up. It resets at {reset}; "
+                                      "try again then."}
     if r.status_code != 200:
         return {"ok": False, "error": f"GitHub answered {r.status_code}."}
     repo = r.json()
